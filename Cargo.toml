@@ -10,4 +10,10 @@ rdev = "0.5.3"
 rodio = { version = "0.17.1", default-features = false, features = [
   "symphonia-mp3",
 ] }
+thiserror = "1.0.48"
 tokio = { version = "1.32.0", features = ["full"] }
+tracing = "0.1.37"
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
+
+[dev-dependencies]
+pretty_assertions = "1.4.0"
