@@ -62,6 +62,16 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        if: matrix.build.OS == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            --no-install-recommends \
+            --allow-unauthenticated \
+            libasound2 \
+            pkg-config
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
