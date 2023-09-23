@@ -31,14 +31,12 @@ pub async fn run() -> Result<()> {
 
     // Create the sink for audio playback.
     let (_stream, handle) = OutputStream::try_default()?;
-    let sink = Sink::try_new(&handle)?;
+    let key_press_sink = Sink::try_new(&handle)?;
+    let key_release_sink = Sink::try_new(&handle)?;
 
     // Handle events loop.
     let mut key_released = true;
     loop {
-        // Create a 2-channel mixer.
-        let (controller, mixer) = rodio::dynamic_mixer::mixer::<i16>(2, 44_100);
-
         // Handle events - i.e. add data to the mixer controller.
         if let Some(event) = receiver.recv().await {
             tracing::debug!("{:?}", event);
@@ -46,17 +44,15 @@ pub async fn run() -> Result<()> {
                 EventType::KeyPress(_) => {
                     if key_released {
                         let sound = Sounds::get_sound(Sound::Keydown)?;
-                        controller.add(rodio::Decoder::new(BufReader::new(sound))?);
-                        sink.stop();
-                        sink.append(mixer);
+                        key_press_sink.stop();
+                        key_press_sink.append(rodio::Decoder::new(BufReader::new(sound))?);
                     }
                     key_released = false;
                 }
                 EventType::KeyRelease(_) => {
                     let sound = Sounds::get_sound(Sound::Keyup)?;
-                    controller.add(rodio::Decoder::new(BufReader::new(sound))?);
-                    sink.stop();
-                    sink.append(mixer);
+                    key_release_sink.stop();
+                    key_release_sink.append(rodio::Decoder::new(BufReader::new(sound))?);
                     key_released = true;
                 }
                 _ => {}
