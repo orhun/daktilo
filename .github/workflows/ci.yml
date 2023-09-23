@@ -26,7 +26,7 @@ jobs:
             --no-install-recommends \
             --allow-unauthenticated \
             libasound2-dev \
-            libx11-dev \
+            libxi-dev \
             pkg-config
 
       - name: Install Rust toolchain
@@ -71,7 +71,7 @@ jobs:
             --no-install-recommends \
             --allow-unauthenticated \
             libasound2-dev \
-            libx11-dev \
+            libxi-dev \
             pkg-config
 
       - name: Install Rust toolchain
