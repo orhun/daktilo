@@ -11,6 +11,10 @@ pub enum Error {
     #[error("Stream error: `{0}`")]
     Stream(#[from] rodio::StreamError),
 
+    /// Error that may occur while decoding data.
+    #[error("Decode error: `{0}`")]
+    Decode(#[from] rodio::decoder::DecoderError),
+
     /// Error that may occur during playing audio.
     #[error("Play error: `{0}`")]
     Play(#[from] rodio::PlayError),

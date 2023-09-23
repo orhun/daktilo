@@ -46,7 +46,7 @@ pub async fn run() -> Result<()> {
                 EventType::KeyPress(_) => {
                     if key_released {
                         let sound = Sounds::get_sound(Sound::Keydown)?;
-                        controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
+                        controller.add(rodio::Decoder::new(BufReader::new(sound))?);
                         sink.stop();
                         sink.append(mixer);
                     }
@@ -54,7 +54,7 @@ pub async fn run() -> Result<()> {
                 }
                 EventType::KeyRelease(_) => {
                     let sound = Sounds::get_sound(Sound::Keyup)?;
-                    controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
+                    controller.add(rodio::Decoder::new(BufReader::new(sound))?);
                     sink.stop();
                     sink.append(mixer);
                     key_released = true;
