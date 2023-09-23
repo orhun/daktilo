@@ -18,6 +18,10 @@ pub enum Error {
     /// Error that may occur when an embedded asset is not found.
     #[error("Asset not found: `{0}`")]
     AssetNotFound(String),
+
+    /// Error that may occur while parsing a filtering directive.
+    #[error("Log directive parse error: `{0}`")]
+    DirectiveParse(#[from] tracing_subscriber::filter::ParseError),
 }
 
 /// Type alias for the standard [`Result`] type.

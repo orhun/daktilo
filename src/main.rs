@@ -16,7 +16,7 @@ use crate::error::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    logger::init(None);
+    logger::init(None)?;
     tracing::info!("starting");
     let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
     thread::spawn(move || {
