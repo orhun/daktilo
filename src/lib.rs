@@ -34,6 +34,7 @@ pub async fn run() -> Result<()> {
     let sink = Sink::try_new(&handle)?;
 
     // Handle events loop.
+    let mut key_released = true;
     loop {
         // Create a 2-channel mixer.
         let (controller, mixer) = rodio::dynamic_mixer::mixer::<i16>(2, 44_100);
@@ -43,19 +44,23 @@ pub async fn run() -> Result<()> {
             tracing::debug!("{:?}", event);
             match event.event_type {
                 EventType::KeyPress(_) => {
-                    let sound = Sounds::get_sound(Sound::Keydown)?;
-                    controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
+                    if key_released {
+                        let sound = Sounds::get_sound(Sound::Keydown)?;
+                        controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
+                        sink.stop();
+                        sink.append(mixer);
+                    }
+                    key_released = false;
                 }
                 EventType::KeyRelease(_) => {
                     let sound = Sounds::get_sound(Sound::Keyup)?;
                     controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
+                    sink.stop();
+                    sink.append(mixer);
+                    key_released = true;
                 }
                 _ => {}
             };
         }
-
-        // Playback.
-        sink.stop();
-        sink.append(mixer);
     }
 }
