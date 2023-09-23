@@ -2,8 +2,12 @@ use crate::error::{Error, Result};
 use rust_embed::RustEmbed;
 use std::{fmt, io::Cursor};
 
-/// Representation of a typewriter sound.
+/// File extension of the audio files.
+const FILE_EXTENSION: &str = "mp3";
+
+/// A typewriter sound.
 #[derive(Debug)]
+#[allow(dead_code)]
 pub enum Sound {
     Ding,
     Keydown,
@@ -21,7 +25,7 @@ impl fmt::Display for Sound {
 impl Sound {
     /// Returns the file name of the sound.
     fn as_file_name(&self) -> String {
-        format!("{}.mp3", self.to_string())
+        format!("{self}.{FILE_EXTENSION}")
     }
 }
 

@@ -1,58 +1,26 @@
-/// Error implementation.
-mod error;
-
-/// Logger.
-mod logger;
-
-/// File embedder.
-mod embed;
-
-/// Command-line arguments.
-mod args;
-
 use clap::Parser;
-use rdev::{listen, EventType};
-use rodio::{OutputStream, Sink};
-use std::{io::BufReader, thread};
+use std::process;
 use tracing::Level;
 
-use crate::args::Args;
-use crate::embed::{Sound, Sounds};
-use crate::error::Result;
+use typewriter::args::Args;
+use typewriter::error::Result;
+use typewriter::logger;
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    // Parse command-line arguments.
     let args = Args::parse();
+
+    // Initialize the logger.
     logger::init(args.verbose.then_some(Level::DEBUG))?;
     tracing::info!("starting");
-    let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
-    thread::spawn(move || {
-        listen(move |event| {
-            sender
-                .send(event)
-                .unwrap_or_else(|e| tracing::error!("could not send event {:?}", e));
-        })
-        .expect("could not listen events");
-    });
-    let (_stream, handle) = OutputStream::try_default()?;
-    let sink = Sink::try_new(&handle)?;
-    loop {
-        let (controller, mixer) = rodio::dynamic_mixer::mixer::<i16>(2, 44_100);
-        if let Some(event) = receiver.recv().await {
-            tracing::debug!("{:?}", event);
-            match event.event_type {
-                EventType::KeyPress(_) => {
-                    let sound = Sounds::get_sound(Sound::Keydown)?;
-                    controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
-                }
-                EventType::KeyRelease(_) => {
-                    let sound = Sounds::get_sound(Sound::Keyup)?;
-                    controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
-                }
-                _ => {}
-            };
+
+    // Run the typewriter.
+    match typewriter::run().await {
+        Ok(_) => process::exit(0),
+        Err(e) => {
+            tracing::error!("error occurred: {e}");
+            process::exit(1)
         }
-        sink.stop();
-        sink.append(mixer);
     }
 }
