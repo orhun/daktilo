@@ -7,16 +7,23 @@ mod logger;
 /// File embedder.
 mod embed;
 
+/// Command-line arguments.
+mod args;
+
+use clap::Parser;
 use rdev::{listen, EventType};
 use rodio::{OutputStream, Sink};
 use std::{io::BufReader, thread};
+use tracing::Level;
 
+use crate::args::Args;
 use crate::embed::{Sound, Sounds};
 use crate::error::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    logger::init(None)?;
+    let args = Args::parse();
+    logger::init(args.verbose.then_some(Level::DEBUG))?;
     tracing::info!("starting");
     let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
     thread::spawn(move || {
