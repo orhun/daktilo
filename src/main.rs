@@ -4,12 +4,15 @@ mod error;
 /// Logger.
 mod logger;
 
+/// File embedder.
+mod embed;
+
 use rdev::{listen, EventType};
 use rodio::{OutputStream, Sink};
-use std::fs::File;
 use std::{io::BufReader, thread};
 
-use error::Result;
+use crate::embed::{Sound, Sounds};
+use crate::error::Result;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -32,12 +35,12 @@ async fn main() -> Result<()> {
             tracing::debug!("{:?}", event);
             match event.event_type {
                 EventType::KeyPress(_) => {
-                    let file = File::open("sounds/keydown.mp3").unwrap();
-                    controller.add(rodio::Decoder::new(BufReader::new(file)).unwrap());
+                    let sound = Sounds::get_sound(Sound::Keydown)?;
+                    controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
                 }
                 EventType::KeyRelease(_) => {
-                    let file = File::open("sounds/keyup.mp3").unwrap();
-                    controller.add(rodio::Decoder::new(BufReader::new(file)).unwrap());
+                    let sound = Sounds::get_sound(Sound::Keyup)?;
+                    controller.add(rodio::Decoder::new(BufReader::new(sound)).unwrap());
                 }
                 _ => {}
             };

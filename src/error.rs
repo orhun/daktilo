@@ -14,6 +14,10 @@ pub enum Error {
     /// Error that may occur during playing audio.
     #[error("Play error: `{0}`")]
     Play(#[from] rodio::PlayError),
+
+    /// Error that may occur when an embedded asset is not found.
+    #[error("Asset not found: `{0}`")]
+    AssetNotFound(String),
 }
 
 /// Type alias for the standard [`Result`] type.
