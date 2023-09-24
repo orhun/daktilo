@@ -254,6 +254,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "clap_complete"
+version = "4.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4110a1e6af615a9e6d0a36f805d5c99099f8bab9b8042f5bc1fa220a4a89e36f"
+dependencies = [
+ "clap",
+]
+
+[[package]]
 name = "clap_derive"
 version = "4.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -270,6 +279,16 @@ name = "clap_lex"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cd7cc57abe963c6d3b9d8be5b06ba7c8957a930305ca90304f24ef040aa6f961"
+
+[[package]]
+name = "clap_mangen"
+version = "0.2.14"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b44f35c514163027542f7147797ff930523eea288e03642727348ef1a9666f6b"
+dependencies = [
+ "clap",
+ "roff",
+]
 
 [[package]]
 name = "cocoa"
@@ -444,6 +463,8 @@ name = "daktilo"
 version = "0.1.0"
 dependencies = [
  "clap",
+ "clap_complete",
+ "clap_mangen",
  "colored",
  "dirs",
  "pretty_assertions",
@@ -1141,6 +1162,12 @@ dependencies = [
  "cpal",
  "symphonia",
 ]
+
+[[package]]
+name = "roff"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b833d8d034ea094b1ea68aa6d5c740e0d04bad9d16568d08ba6f76823a114316"
 
 [[package]]
 name = "rust-embed"

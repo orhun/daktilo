@@ -10,6 +10,15 @@ repository = "https://github.com/orhun/daktilo"
 keywords = ["typewriter", "keyboard", "nostalgic", "type"]
 categories = ["command-line-utilities", "multimedia"]
 edition = "2021"
+default-run = "daktilo"
+
+[[bin]]
+name = "daktilo-completions"
+path = "src/bin/completions.rs"
+
+[[bin]]
+name = "daktilo-mangen"
+path = "src/bin/mangen.rs"
 
 [dependencies]
 rdev = { version = "0.5.3", features = ["serialize"] }
@@ -28,6 +37,8 @@ toml = "0.8.0"
 regex = "1.9.5"
 serde_regex = "1.1.0"
 colored = "2.0.4"
+clap_complete = "4.4.1"
+clap_mangen = "0.2.14"
 
 [dev-dependencies]
 pretty_assertions = "1.4.0"
