@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use clap::Parser;
 
 /// Argument parser powered by [`clap`].
@@ -18,8 +20,17 @@ use clap::Parser;
 )]
 pub struct Args {
     /// Enables verbose logging.
-    #[arg(short, long)]
+    #[arg(short, long, env)]
     pub verbose: bool,
+    /// Sets the name of the sound preset to use.
+    #[arg(short, long, env)]
+    pub preset: Option<String>,
+    /// Sets the configuration file.
+    #[arg(short, long, env = "TYPEWRITER_CONFIG", value_name = "PATH")]
+    pub config: Option<PathBuf>,
+    /// Writes the default configuration file.
+    #[arg(short, long)]
+    pub init: bool,
 }
 
 #[cfg(test)]

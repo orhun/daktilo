@@ -1,0 +1,22 @@
+[[sound_preset]]
+name = "default"
+key_config = [
+  { event = "key_press", keys = "enter", file = "ding.mp3", volume = 1.0, embed = true },
+  { event = "key_release", keys = "enter", file = "keyup.mp3", volume = 1.0, embed = true },
+  { event = "key_press", keys = ".*", file = "keydown.mp3", volume = 1.0, embed = true },
+  { event = "key_release", keys = ".*", file = "keyup.mp3", volume = 1.0, embed = true },
+]
+disabled_keys = []
+
+[[sound_preset]]
+name = "simple"
+key_config = [
+  { event = "key_press", keys = "enter", file = "newline.mp3", embed = true },
+  { event = "key_press", keys = ".*", file = "keystroke.mp3", embed = true },
+]
+disabled_keys = ["up", "down", "left", "right", "backspace"]
+
+[[sound_preset]]
+name = "custom"
+key_config = [{ event = "key_press", keys = ".*", file = "duck.mp3" }]
+disabled_keys = []

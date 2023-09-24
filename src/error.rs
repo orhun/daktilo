@@ -23,9 +23,26 @@ pub enum Error {
     #[error("Asset not found: `{0}`")]
     AssetNotFound(String),
 
+    /// Error that may occur while extracting the embedded content.
+    #[error("Embedded error: `{0}`")]
+    Embedded(String),
+
     /// Error that may occur while parsing a filtering directive.
     #[error("Log directive parse error: `{0}`")]
     DirectiveParse(#[from] tracing_subscriber::filter::ParseError),
+
+    /// Error that may occur while parsing TOML.
+    #[error("TOML parse error: `{0}`")]
+    TomlParse(#[from] toml::de::Error),
+
+    /// Error that may occur when attempting to interpret a sequence of u8 as a
+    /// string.
+    #[error("UTF-8 error: `{0}`")]
+    Utf8Error(#[from] std::str::Utf8Error),
+
+    /// Error that may occur when a preset is not found.
+    #[error("Preset not found: `{0}`")]
+    PresetNotFound(String),
 }
 
 /// Type alias for the standard [`Result`] type.
