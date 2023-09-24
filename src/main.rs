@@ -2,11 +2,11 @@ use clap::Parser;
 use std::{fs, process};
 use tracing::Level;
 
-use typewriter::args::Args;
-use typewriter::config::{Config, DEFAULT_CONFIG};
-use typewriter::embed::EmbeddedConfig;
-use typewriter::error::{Error, Result};
-use typewriter::logger;
+use daktilo::args::Args;
+use daktilo::config::{Config, DEFAULT_CONFIG};
+use daktilo::embed::EmbeddedConfig;
+use daktilo::error::{Error, Result};
+use daktilo::logger;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -33,14 +33,14 @@ async fn main() -> Result<()> {
     };
     tracing::debug!("{:#?}", config);
 
-    // Run the typewriter.
+    // Start the typewriter.
     let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
     let preset = config
         .sound_presets
         .into_iter()
         .find(|v| v.name == preset_name)
         .ok_or_else(|| Error::PresetNotFound(preset_name))?;
-    match typewriter::run(preset).await {
+    match daktilo::run(preset).await {
         Ok(_) => process::exit(0),
         Err(e) => {
             tracing::error!("error occurred: {e}");

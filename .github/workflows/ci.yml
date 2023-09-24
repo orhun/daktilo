@@ -91,5 +91,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.build.OS }}-${{ matrix.build.TARGET }}-assets
-          path: target/debug/typewriter*
+          name: daktilo-${{ matrix.build.TARGET }}-assets
+          path: target/debug/daktilo*

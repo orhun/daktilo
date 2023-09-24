@@ -1,5 +1,5 @@
 [package]
-name = "typewriter"
+name = "daktilo"
 version = "0.1.0"
 description = "Turn your keyboard into a typewriter"
 edition = "2021"

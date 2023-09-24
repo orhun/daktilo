@@ -429,6 +429,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "daktilo"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "dirs",
+ "pretty_assertions",
+ "rdev",
+ "regex",
+ "rodio",
+ "rust-embed",
+ "serde",
+ "serde_regex",
+ "thiserror",
+ "tokio",
+ "toml",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "dasp_sample"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1523,26 +1543,6 @@ name = "typenum"
 version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "42ff0bf0c66b8238c6f3b578df37d0b7848e55df8577b3f74f92a69acceeb825"
-
-[[package]]
-name = "typewriter"
-version = "0.1.0"
-dependencies = [
- "clap",
- "dirs",
- "pretty_assertions",
- "rdev",
- "regex",
- "rodio",
- "rust-embed",
- "serde",
- "serde_regex",
- "thiserror",
- "tokio",
- "toml",
- "tracing",
- "tracing-subscriber",
-]
 
 [[package]]
 name = "unicode-ident"

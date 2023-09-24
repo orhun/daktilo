@@ -26,7 +26,7 @@ pub struct Args {
     #[arg(short, long, env)]
     pub preset: Option<String>,
     /// Sets the configuration file.
-    #[arg(short, long, env = "TYPEWRITER_CONFIG", value_name = "PATH")]
+    #[arg(short, long, env = "DAKTILO_CONFIG", value_name = "PATH")]
     pub config: Option<PathBuf>,
     /// Writes the default configuration file.
     #[arg(short, long)]
