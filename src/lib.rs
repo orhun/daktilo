@@ -1,3 +1,7 @@
+//! Turn your keyboard into a typewriter! 📇
+
+#![warn(missing_docs)]
+
 /// Error implementation.
 pub mod error;
 
