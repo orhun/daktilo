@@ -1,14 +1,15 @@
 [package]
 name = "daktilo"
 version = "0.1.0"
-description = "Turn your keyboard into a typewriter!"
+description = "Turn your keyboard into a typewriter! 📇"
 authors = ["Orhun Parmaksız <orhunparmaksiz@gmail.com>"]
-documentation = "https://docs.rs/daktilo"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
 homepage = "https://github.com/orhun/daktilo"
 repository = "https://github.com/orhun/daktilo"
+keywords = ["typewriter", "keyboard", "nostalgic", "type"]
+categories = ["command-line-utilities", "multimedia"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 rdev = { version = "0.5.3", features = ["serialize"] }
