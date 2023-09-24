@@ -8,7 +8,7 @@ key_config = [
 disabled_keys = []
 
 [[sound_preset]]
-name = "simple"
+name = "basic"
 key_config = [
   { event = "key_press", keys = "Return", file = "newline.mp3", embed = true },
   { event = "key_press", keys = ".*", file = "keystroke.mp3", embed = true },

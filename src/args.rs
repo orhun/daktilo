@@ -2,6 +2,17 @@ use std::path::PathBuf;
 
 use clap::Parser;
 
+/// Typewriter ASCII banner.
+pub const BANNER: &str = r#"
+      .-------.
+     _|~~ ~~  |_
+   =(_|_______|_)=
+     |:::::::::|
+     |:::::::[]|
+     |o=======.|
+     `"""""""""`
+"#;
+
 /// Argument parser powered by [`clap`].
 #[derive(Debug, Default, Parser)]
 #[clap(
@@ -9,9 +20,10 @@ use clap::Parser;
     author = clap::crate_authors!("\n"),
     about,
 	rename_all_env = "screaming-snake",
+	before_help = BANNER,
 	help_template = "\
-{before-help}{name} {version}
-{author-with-newline}{about-with-newline}
+{before-help}-=[ {name} {version} ]=-\n
+{about-with-newline}Written by {author-with-newline}
 {usage-heading}
   {usage}
 
