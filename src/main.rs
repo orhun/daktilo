@@ -34,6 +34,14 @@ async fn main() -> Result<()> {
     tracing::debug!("{:#?}", config);
 
     // Start the typewriter.
+    if args.list {
+        tracing::info!("Listing the presets:");
+        config
+            .sound_presets
+            .iter()
+            .for_each(|preset| println!("{}", preset));
+        return Ok(());
+    }
     let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
     let preset = config
         .sound_presets

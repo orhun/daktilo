@@ -37,6 +37,9 @@ pub struct Args {
     /// Sets the name of the sound preset to use.
     #[arg(short, long, env)]
     pub preset: Option<String>,
+    /// Lists the available presets.
+    #[arg(short, long, alias = "ls")]
+    pub list: bool,
     /// Sets the configuration file.
     #[arg(short, long, env = "DAKTILO_CONFIG", value_name = "PATH")]
     pub config: Option<PathBuf>,

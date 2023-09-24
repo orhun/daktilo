@@ -1,8 +1,10 @@
 use crate::error::Result;
+use colored::*;
 use rdev::Key;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::env;
+use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::str;
@@ -60,6 +62,37 @@ pub struct SoundPreset {
     pub key_config: Vec<KeyConfig>,
     /// List of disabled keys.
     pub disabled_keys: Option<Vec<Key>>,
+}
+
+impl fmt::Display for SoundPreset {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        writeln!(f, "[{}]", self.name.white().bold())?;
+        let mut table = format!(
+            " {:<20}  {:<20}  {:<20}\n",
+            "Event".bold(),
+            "Keys".bold(),
+            "File".bold()
+        );
+        table.push_str(&format!(
+            " {:<20}  {:<20}  {:<20}\n",
+            "-----", "----", "----"
+        ));
+        for key_config in &self.key_config {
+            let event_str = match key_config.event {
+                KeyEventConfig::KeyPress => "Key Press",
+                KeyEventConfig::KeyRelease => "Key Release",
+            };
+            let keys_str = key_config.keys.as_str();
+            let file_str = &key_config.file;
+            table.push_str(&format!(
+                " {:<20}  {:<20}  {:<20}\n",
+                event_str,
+                keys_str,
+                file_str.italic()
+            ));
+        }
+        write!(f, "{}", table)
+    }
 }
 
 /// Key configuration.
