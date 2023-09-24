@@ -10,11 +10,13 @@ mod embed;
 /// Command-line arguments.
 pub mod args;
 
-use embed::{Sound, Sounds};
+/// Application state.
+pub mod app;
+
+use app::App;
 use error::Result;
 use rdev::{listen, EventType};
-use rodio::{OutputStream, Sink};
-use std::{io::BufReader, thread};
+use std::thread;
 
 /// Starts the typewriter.
 pub async fn run() -> Result<()> {
@@ -29,31 +31,19 @@ pub async fn run() -> Result<()> {
         .expect("could not listen events");
     });
 
-    // Create the sink for audio playback.
-    let (_stream, handle) = OutputStream::try_default()?;
-    let key_press_sink = Sink::try_new(&handle)?;
-    let key_release_sink = Sink::try_new(&handle)?;
+    // Create the application state.
+    let mut app = App::init()?;
 
     // Handle events loop.
-    let mut key_released = true;
     loop {
-        // Handle events - i.e. add data to the mixer controller.
         if let Some(event) = receiver.recv().await {
             tracing::debug!("{:?}", event);
             match event.event_type {
                 EventType::KeyPress(_) => {
-                    if key_released {
-                        let sound = Sounds::get_sound(Sound::Keydown)?;
-                        key_press_sink.stop();
-                        key_press_sink.append(rodio::Decoder::new(BufReader::new(sound))?);
-                    }
-                    key_released = false;
+                    app.handle_key_press()?;
                 }
                 EventType::KeyRelease(_) => {
-                    let sound = Sounds::get_sound(Sound::Keyup)?;
-                    key_release_sink.stop();
-                    key_release_sink.append(rodio::Decoder::new(BufReader::new(sound))?);
-                    key_released = true;
+                    app.handle_key_release()?;
                 }
                 _ => {}
             };
