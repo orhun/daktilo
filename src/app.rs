@@ -95,10 +95,12 @@ impl App {
         if key_config.embed.unwrap_or(false) {
             let sound = BufReader::new(Box::new(EmbeddedSound::get_sound(&key_config.file)?));
             sink.stop();
+            sink.set_volume(key_config.volume.unwrap_or(1.0));
             sink.append(Decoder::new(sound)?);
         } else {
             let sound = BufReader::new(Box::new(File::open(&key_config.file)?));
             sink.stop();
+            sink.set_volume(key_config.volume.unwrap_or(1.0));
             sink.append(Decoder::new(sound)?);
         };
         Ok(())

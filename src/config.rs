@@ -73,7 +73,7 @@ pub struct KeyConfig {
     /// MP3 file.
     pub file: String,
     /// Volume.
-    pub volume: Option<f64>,
+    pub volume: Option<f32>,
     /// Whether if the file is embedded.
     pub embed: Option<bool>,
 }
