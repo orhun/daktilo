@@ -1,6 +1,6 @@
-use crate::error::{Error, Result};
+use crate::error::Result;
+use rdev::Key;
 use regex::Regex;
-use rust_embed::RustEmbed;
 use serde::{Deserialize, Serialize};
 use std::env;
 use std::fs;
@@ -9,30 +9,6 @@ use std::str;
 
 /// Default configuration file.
 pub const DEFAULT_CONFIG: &str = concat!(env!("CARGO_PKG_NAME"), ".toml");
-
-/// Configuration file embedder/extractor.
-///
-/// Embeds `config/`[`DEFAULT_CONFIG`] into the binary.
-#[derive(Debug, RustEmbed)]
-#[folder = "config/"]
-pub struct EmbeddedConfig;
-
-impl EmbeddedConfig {
-    /// Extracts the embedded content.
-    pub fn get_config() -> Result<String> {
-        match Self::get(DEFAULT_CONFIG) {
-            Some(v) => Ok(str::from_utf8(&v.data)?.to_string()),
-            None => Err(Error::Embedded(String::from("embedded config not found"))),
-        }
-    }
-
-    /// Parses the extracted content into [`Config`].
-    ///
-    /// [`Config`]: Config
-    pub fn parse() -> Result<Config> {
-        Ok(toml::from_str(&Self::get_config()?)?)
-    }
-}
 
 /// Configuration.
 #[derive(Debug, Serialize, Deserialize)]
@@ -83,11 +59,11 @@ pub struct SoundPreset {
     /// Key configuration.
     pub key_config: Vec<KeyConfig>,
     /// List of disabled keys.
-    pub disabled_keys: Option<Vec<String>>,
+    pub disabled_keys: Option<Vec<Key>>,
 }
 
 /// Key configuration.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct KeyConfig {
     /// Event.
     pub event: KeyEventConfig,
@@ -103,7 +79,7 @@ pub struct KeyConfig {
 }
 
 /// Key configuration.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, Eq, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum KeyEventConfig {
     /// Key press.

@@ -5,7 +5,7 @@ pub mod error;
 pub mod logger;
 
 /// File embedder.
-mod embed;
+pub mod embed;
 
 /// Command-line arguments.
 pub mod args;
@@ -19,11 +19,11 @@ pub mod config;
 use app::App;
 use config::SoundPreset;
 use error::Result;
-use rdev::{listen, EventType};
+use rdev::listen;
 use std::thread;
 
 /// Starts the typewriter.
-pub async fn run(sound_preset: &SoundPreset) -> Result<()> {
+pub async fn run(sound_preset: SoundPreset) -> Result<()> {
     // Create a listener for the keyboard events.
     let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
     thread::spawn(move || {
@@ -36,22 +36,13 @@ pub async fn run(sound_preset: &SoundPreset) -> Result<()> {
     });
 
     // Create the application state.
-    let mut app = App::init()?;
     tracing::debug!("{:#?}", sound_preset);
+    let mut app = App::init(sound_preset)?;
 
-    // Handle events loop.
+    // Handle events.
     loop {
         if let Some(event) = receiver.recv().await {
-            tracing::debug!("{:?}", event);
-            match event.event_type {
-                EventType::KeyPress(_) => {
-                    app.handle_key_press()?;
-                }
-                EventType::KeyRelease(_) => {
-                    app.handle_key_release()?;
-                }
-                _ => {}
-            };
+            app.handle_event(event)?;
         }
     }
 }

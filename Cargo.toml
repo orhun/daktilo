@@ -7,7 +7,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rdev = "0.5.3"
+rdev = { version = "0.5.3", features = ["serialize"] }
 rodio = { version = "0.17.1", default-features = false, features = [
   "symphonia-mp3",
 ] }

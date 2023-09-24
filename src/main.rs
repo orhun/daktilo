@@ -3,7 +3,8 @@ use std::{fs, process};
 use tracing::Level;
 
 use typewriter::args::Args;
-use typewriter::config::{Config, EmbeddedConfig, DEFAULT_CONFIG};
+use typewriter::config::{Config, DEFAULT_CONFIG};
+use typewriter::embed::EmbeddedConfig;
 use typewriter::error::{Error, Result};
 use typewriter::logger;
 
@@ -36,7 +37,7 @@ async fn main() -> Result<()> {
     let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
     let preset = config
         .sound_presets
-        .iter()
+        .into_iter()
         .find(|v| v.name == preset_name)
         .ok_or_else(|| Error::PresetNotFound(preset_name))?;
     match typewriter::run(preset).await {

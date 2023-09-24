@@ -1,8 +1,7 @@
 [[sound_preset]]
 name = "default"
 key_config = [
-  { event = "key_press", keys = "enter", file = "ding.mp3", volume = 1.0, embed = true },
-  { event = "key_release", keys = "enter", file = "keyup.mp3", volume = 1.0, embed = true },
+  { event = "key_press", keys = "Return", file = "ding.mp3", volume = 1.0, embed = true },
   { event = "key_press", keys = ".*", file = "keydown.mp3", volume = 1.0, embed = true },
   { event = "key_release", keys = ".*", file = "keyup.mp3", volume = 1.0, embed = true },
 ]
@@ -11,10 +10,10 @@ disabled_keys = []
 [[sound_preset]]
 name = "simple"
 key_config = [
-  { event = "key_press", keys = "enter", file = "newline.mp3", embed = true },
+  { event = "key_press", keys = "Return", file = "newline.mp3", embed = true },
   { event = "key_press", keys = ".*", file = "keystroke.mp3", embed = true },
 ]
-disabled_keys = ["up", "down", "left", "right", "backspace"]
+disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]
 
 [[sound_preset]]
 name = "custom"
