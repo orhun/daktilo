@@ -17,5 +17,7 @@ disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]
 
 [[sound_preset]]
 name = "custom"
-key_config = [{ event = "key_press", keys = ".*", file = "duck.mp3" }]
+key_config = [
+  { event = "key_press", keys = ".*", file = "custom/quack.mp3", volume = 10.0 },
+]
 disabled_keys = []
