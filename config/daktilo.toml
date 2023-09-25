@@ -32,14 +32,14 @@ disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]
 name = "musicbox"
 key_config = [
   { event = "key_press", keys = ".*", files = [
-    { path = "custom/mbox1.mp3" },
-    { path = "custom/mbox2.mp3" },
-    { path = "custom/mbox3.mp3" },
-    { path = "custom/mbox4.mp3" },
-    { path = "custom/mbox5.mp3" },
-    { path = "custom/mbox6.mp3" },
-    { path = "custom/mbox7.mp3" },
-    { path = "custom/mbox8.mp3" },
+    { path = "mbox1.mp3" },
+    { path = "mbox2.mp3" },
+    { path = "mbox3.mp3" },
+    { path = "mbox4.mp3" },
+    { path = "mbox5.mp3" },
+    { path = "mbox6.mp3" },
+    { path = "mbox7.mp3" },
+    { path = "mbox8.mp3" },
   ], strategy = "random" },
 ]
 disabled_keys = []
@@ -48,7 +48,7 @@ disabled_keys = []
 name = "custom"
 key_config = [
   { event = "key_press", keys = ".*", files = [
-    { path = "custom/quack.mp3", volume = 10.0 },
+    { path = "quack.mp3", volume = 10.0 },
   ] },
 ]
 disabled_keys = []
