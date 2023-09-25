@@ -47,8 +47,11 @@ disabled_keys = []
 [[sound_preset]]
 name = "ducktilo"
 key_config = [
+  { event = "key_press", keys = "Return", files = [
+    { path = "quack2.mp3" },
+  ] },
   { event = "key_press", keys = ".*", files = [
-    { path = "quack.mp3", volume = 5.0 },
+    { path = "quack1.mp3", volume = 10.0 },
   ] },
 ]
 disabled_keys = []
