@@ -11,7 +11,6 @@ key_config = [
     { path = "keyup.mp3", volume = 1.0 },
   ] },
 ]
-disabled_keys = []
 
 [[sound_preset]]
 name = "basic"
@@ -42,7 +41,6 @@ key_config = [
     { path = "mbox8.mp3" },
   ], strategy = "random" },
 ]
-disabled_keys = []
 
 [[sound_preset]]
 name = "ducktilo"
@@ -54,4 +52,3 @@ key_config = [
     { path = "quack1.mp3", volume = 10.0 },
   ] },
 ]
-disabled_keys = []
