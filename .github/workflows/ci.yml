@@ -85,6 +85,9 @@ jobs:
       - name: Cache Cargo dependencies
         uses: Swatinem/rust-cache@v2
 
+      - name: Run tests
+        run: cargo test --locked --verbose
+
       - name: Build the project
         run: cargo build --locked --verbose
 
