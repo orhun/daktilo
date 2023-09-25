@@ -2,13 +2,13 @@
 name = "default"
 key_config = [
   { event = "key_press", keys = "Return", files = [
-    { path = "ding.mp3", volume = 1.0, embed = true },
+    { path = "ding.mp3", volume = 1.0 },
   ] },
   { event = "key_press", keys = ".*", files = [
-    { path = "keydown.mp3", volume = 1.0, embed = true },
+    { path = "keydown.mp3", volume = 1.0 },
   ] },
   { event = "key_release", keys = ".*", files = [
-    { path = "keyup.mp3", volume = 1.0, embed = true },
+    { path = "keyup.mp3", volume = 1.0 },
   ] },
 ]
 disabled_keys = []
@@ -17,10 +17,10 @@ disabled_keys = []
 name = "basic"
 key_config = [
   { event = "key_press", keys = "Return", files = [
-    { path = "newline.mp3", embed = true },
+    { path = "newline.mp3" },
   ] },
   { event = "key_press", keys = ".*", files = [
-    { path = "keystroke.mp3", embed = true },
+    { path = "keystroke.mp3" },
   ] },
 ]
 disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]

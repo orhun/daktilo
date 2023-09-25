@@ -13,10 +13,8 @@ pub struct EmbeddedSound;
 
 impl EmbeddedSound {
     /// Returns the bytes of the sound.
-    pub fn get_sound(name: &str) -> Result<Cursor<Vec<u8>>> {
-        Self::get(name)
-            .map(|v| Cursor::new(v.data.to_vec()))
-            .ok_or_else(|| Error::AssetNotFound(name.to_string()))
+    pub fn get_sound(name: &str) -> Option<Cursor<Vec<u8>>> {
+        Self::get(name).map(|v| Cursor::new(v.data.to_vec()))
     }
 }
 

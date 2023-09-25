@@ -131,8 +131,6 @@ pub struct AudioFile {
     pub path: String,
     /// Volume.
     pub volume: Option<f32>,
-    /// Whether if the file is embedded.
-    pub embed: Option<bool>,
 }
 
 /// Playback strategy.

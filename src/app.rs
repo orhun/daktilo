@@ -125,8 +125,8 @@ impl App {
     /// Play the sound from embedded/file for the given sink.
     fn play_sound(&self, file: &AudioFile, sink: &Sink) -> Result<()> {
         tracing::debug!("Playing: {:?}", file);
-        if file.embed.unwrap_or(false) {
-            let sound = BufReader::new(Box::new(EmbeddedSound::get_sound(&file.path)?));
+        if let Some(embed_data) = EmbeddedSound::get_sound(&file.path) {
+            let sound = BufReader::new(Box::new(embed_data));
             sink.stop();
             sink.set_volume(file.volume.unwrap_or(1.0));
             sink.append(Decoder::new(sound)?);
