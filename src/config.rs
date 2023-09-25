@@ -79,11 +79,16 @@ impl fmt::Display for SoundPreset {
         ));
         for key_config in &self.key_config {
             let event_str = match key_config.event {
-                KeyEventConfig::KeyPress => "Key Press",
-                KeyEventConfig::KeyRelease => "Key Release",
+                KeyEvent::KeyPress => "Key Press",
+                KeyEvent::KeyRelease => "Key Release",
             };
             let keys_str = key_config.keys.as_str();
-            let file_str = &key_config.file;
+            let file_str = &key_config
+                .files
+                .iter()
+                .map(|v| v.path.clone())
+                .collect::<Vec<String>>()
+                .join(",");
             table.push_str(&format!(
                 " {:<20}  {:<20}  {:<20}\n",
                 event_str,
@@ -99,26 +104,45 @@ impl fmt::Display for SoundPreset {
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct KeyConfig {
     /// Event.
-    pub event: KeyEventConfig,
+    pub event: KeyEvent,
     /// Keys regex.
     #[serde(with = "serde_regex")]
     pub keys: Regex,
-    /// MP3 file.
-    pub file: String,
+    /// MP3 files.
+    pub files: Vec<AudioFile>,
+    /// Playback strategy.
+    pub strategy: Option<PlaybackStrategy>,
+}
+
+/// Key event type.
+#[derive(Clone, Debug, Serialize, Deserialize, Eq, PartialEq)]
+#[serde(rename_all = "snake_case")]
+pub enum KeyEvent {
+    /// Key press.
+    KeyPress,
+    /// Key release.
+    KeyRelease,
+}
+
+/// Audio file configuration.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct AudioFile {
+    /// Path of the file.
+    pub path: String,
     /// Volume.
     pub volume: Option<f32>,
     /// Whether if the file is embedded.
     pub embed: Option<bool>,
 }
 
-/// Key configuration.
+/// Playback strategy.
 #[derive(Clone, Debug, Serialize, Deserialize, Eq, PartialEq)]
 #[serde(rename_all = "snake_case")]
-pub enum KeyEventConfig {
-    /// Key press.
-    KeyPress,
-    /// Key release.
-    KeyRelease,
+pub enum PlaybackStrategy {
+    /// Pick random.
+    Random,
+    /// Play sequentially.
+    Sequential,
 }
 
 #[cfg(test)]

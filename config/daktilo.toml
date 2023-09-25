@@ -1,23 +1,35 @@
 [[sound_preset]]
 name = "default"
 key_config = [
-  { event = "key_press", keys = "Return", file = "ding.mp3", volume = 1.0, embed = true },
-  { event = "key_press", keys = ".*", file = "keydown.mp3", volume = 1.0, embed = true },
-  { event = "key_release", keys = ".*", file = "keyup.mp3", volume = 1.0, embed = true },
+  { event = "key_press", keys = "Return", files = [
+    { path = "ding.mp3", volume = 1.0, embed = true },
+  ] },
+  { event = "key_press", keys = ".*", files = [
+    { path = "keydown.mp3", volume = 1.0, embed = true },
+  ] },
+  { event = "key_release", keys = ".*", files = [
+    { path = "keyup.mp3", volume = 1.0, embed = true },
+  ] },
 ]
 disabled_keys = []
 
 [[sound_preset]]
 name = "basic"
 key_config = [
-  { event = "key_press", keys = "Return", file = "newline.mp3", embed = true },
-  { event = "key_press", keys = ".*", file = "keystroke.mp3", embed = true },
+  { event = "key_press", keys = "Return", files = [
+    { path = "newline.mp3", embed = true },
+  ] },
+  { event = "key_press", keys = ".*", files = [
+    { path = "keystroke.mp3", embed = true },
+  ] },
 ]
 disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]
 
 [[sound_preset]]
 name = "custom"
 key_config = [
-  { event = "key_press", keys = ".*", file = "custom/quack.mp3", volume = 10.0 },
+  { event = "key_press", keys = ".*", files = [
+    { path = "custom/quack.mp3", volume = 10.0 },
+  ] },
 ]
 disabled_keys = []

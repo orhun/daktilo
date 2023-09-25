@@ -43,6 +43,10 @@ pub enum Error {
     /// Error that may occur when a preset is not found.
     #[error("Preset not found: `{0}`")]
     PresetNotFound(String),
+
+    /// Error that may occur when no audio files are given.
+    #[error("No audio files to play")]
+    NoAudioFiles,
 }
 
 /// Type alias for the standard [`Result`] type.
