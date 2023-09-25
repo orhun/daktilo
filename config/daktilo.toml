@@ -25,15 +25,6 @@ key_config = [
 ]
 disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]
 
-[[sound_preset]]
-name = "custom"
-key_config = [
-  { event = "key_press", keys = ".*", files = [
-    { path = "custom/quack.mp3", volume = 10.0 },
-  ] },
-]
-disabled_keys = []
-
 # It dings, and it dongs. Nuff' said.
 # With this rather more calming experience maybe you will think twice
 # before typing down passive aggressive emails.
@@ -41,14 +32,23 @@ disabled_keys = []
 name = "musicbox"
 key_config = [
   { event = "key_press", keys = ".*", files = [
-    { path = "custom/mbox1.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox2.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox3.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox4.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox5.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox6.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox7.mp3", volume = 1.0, embed = false },
-    { path = "custom/mbox8.mp3", volume = 1.0, embed = false },
+    { path = "custom/mbox1.mp3" },
+    { path = "custom/mbox2.mp3" },
+    { path = "custom/mbox3.mp3" },
+    { path = "custom/mbox4.mp3" },
+    { path = "custom/mbox5.mp3" },
+    { path = "custom/mbox6.mp3" },
+    { path = "custom/mbox7.mp3" },
+    { path = "custom/mbox8.mp3" },
   ], strategy = "random" },
+]
+disabled_keys = []
+
+[[sound_preset]]
+name = "custom"
+key_config = [
+  { event = "key_press", keys = ".*", files = [
+    { path = "custom/quack.mp3", volume = 10.0 },
+  ] },
 ]
 disabled_keys = []
