@@ -34,6 +34,9 @@ key_config = [
 ]
 disabled_keys = []
 
+# It dings, and it dongs. Nuff' said.
+# With this rather more calming experience maybe you will think twice
+# before typing down passive aggressive emails.
 [[sound_preset]]
 name = "musicbox"
 key_config = [
