@@ -9,8 +9,9 @@ homepage = "https://github.com/orhun/daktilo"
 repository = "https://github.com/orhun/daktilo"
 keywords = ["typewriter", "keyboard", "nostalgic", "type"]
 categories = ["command-line-utilities", "multimedia"]
-edition = "2021"
 default-run = "daktilo"
+rust-version = "1.70.0"
+edition = "2021"
 
 [[bin]]
 name = "daktilo-completions"
