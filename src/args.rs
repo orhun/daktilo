@@ -19,9 +19,9 @@ pub const BANNER: &str = r#"
     version,
     author = clap::crate_authors!("\n"),
     about,
-	rename_all_env = "screaming-snake",
-	before_help = BANNER,
-	help_template = "\
+    rename_all_env = "screaming-snake",
+    before_help = BANNER,
+    help_template = "\
 {before-help}-=[ {name} {version} ]=-\n
 {about-with-newline}Written by {author-with-newline}
 {usage-heading}

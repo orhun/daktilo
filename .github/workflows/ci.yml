@@ -102,8 +102,14 @@ jobs:
       - name: Cache Cargo dependencies
         uses: Swatinem/rust-cache@v2
 
-      - name: Check formatting
+      - name: Check code formatting
         run: cargo fmt --all -- --check
+
+      - name: Install editorconfig-checker
+        uses: editorconfig-checker/action-editorconfig-checker@main
+
+      - name: Check file formatting
+        run: editorconfig-checker
 
       - name: Check lints
         run: cargo clippy -- -D warnings
