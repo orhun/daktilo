@@ -167,7 +167,7 @@ As an example, here is how you can configure `key_config`:
 
 ```toml
 key_config = [
-  { event = "press", keys = "return", files = [{ path = "ding.mp3", volume = 1.0 }]] },
+  { event = "press", keys = "return", files = [{ path = "ding.mp3", volume = 1.0 }] },
 ]
 ```
 
@@ -177,7 +177,56 @@ key_config = [
   - `path`: The absolute path of the file. If the file is embedded in the binary (i.e. if it is inside `sounds/` directory) then it is the name of the file without full path.
   - `volume`: The volume of the sound. The value 1.0 is the "normal" volume (unfiltered input). Any value other than 1.0 will multiply each sample by this value.
 
-TODO: mention strategy
+If you have defined multiple files for a key event, you can also specify a strategy for how to play them:
+
+```toml
+key_config = [
+  { event = "press", keys = ".*", files = [{ path = "1.mp3" }, { path = "2.mp3" }], strategy = "random" },
+]
+```
+
+Currently supported strategies are:
+
+- `strategy = "random"`: pick a random file from the list and play it.
+- `strategy = "sequential"`: play the files sequentially.
+
+Here is how you can combine everything together:
+
+```toml
+[[sound_preset]]
+# Custom sound preset named "custom"
+name = "custom"
+
+# Key configurations for various events
+key_config = [
+  # When a key starting with "Key" is pressed, play 1.mp3, 2.mp3, and 3.mp3 sequentially
+  { event = "press", keys = "Key*", files = [
+    { path = "1.mp3" },
+    { path = "2.mp3" },
+    { path = "3.mp3" },
+  ], strategy = "sequential" },
+
+  # When a key starting with "Key" is released, play 4.mp3
+  { event = "release", keys = "Key*", files = [
+    { path = "4.mp3" },
+  ] },
+
+  # When a key starting with "Num" is pressed, play num.mp3 at a very high volume (10.0)
+  { event = "press", keys = "Num*", files = [
+    { path = "num.mp3", volume = 10.0 },
+  ] },
+
+  # When any key is pressed, play a random sound from cat.mp3, dog.mp3, or bird.mp3
+  { event = "press", keys = ".*", files = [
+    { path = "cat.mp3" },
+    { path = "dog.mp3" },
+    { path = "bird.mp3" },
+  ], strategy = "random" },
+]
+
+# Disabled keys that won't trigger any sound events
+disabled_keys = ["CapsLock", "NumLock"]
+```
 
 ## Acknowledgements
 
