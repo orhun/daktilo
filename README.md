@@ -135,7 +135,49 @@ daktilo --init
 
 ### Adding custom presets
 
-TODO
+The configuration file consists of an array of `sound_preset` entries.
+
+To define an array in TOML, you can create different sections as follows:
+
+```toml
+[[sound_preset]]
+name = "custom"
+key_config = []
+
+[[sound_preset]]
+name = "another_custom"
+key_config = []
+disabled_keys = []
+```
+
+As show above, `sound_preset` consists of 2 entries:
+
+- `name`: The name of the preset. It will be used in conjunction with `--preset` flag. e.g. `--preset custom`
+- `key_config`: An array of key press/release events for assigning audio files to the specified keys. It can also be used to control the volume etc.
+- `disabled_keys`: An array of keys that will not be used for playback.
+
+<details>
+  <summary>Click for the <a href="https://docs.rs/rdev/latest/rdev/enum.Key.html">list of available keys</a>.</summary>
+
+`Alt`, `AltGr`, `Backspace`, `CapsLock`, `ControlLeft`, `ControlRight`, `Delete`, `DownArrow`, `End`, `Escape`, `F1`, `F10`, `F11`, `F12`, `F2`, `F3`, `F4`, `F5`, `F6`, `F7`, `F8`, `F9`, `Home`, `LeftArrow`, `MetaLeft`, `MetaRight`, `PageDown`, `PageUp`, `Return`, `RightArrow`, `ShiftLeft`, `ShiftRight`, `Space`, `Tab`, `UpArrow`, `PrintScreen`, `ScrollLock`, `Pause`, `NumLock`, `BackQuote`, `Num1`, `Num2`, `Num3`, `Num4`, `Num5`, `Num6`, `Num7`, `Num8`, `Num9`, `Num0`, `Minus`, `Equal`, `KeyQ`, `KeyW`, `KeyE`, `KeyR`, `KeyT`, `KeyY`, `KeyU`, `KeyI`, `KeyO`, `KeyP`, `LeftBracket`, `RightBracket`, `KeyA`, `KeyS`, `KeyD`, `KeyF`, `KeyG`, `KeyH`, `KeyJ`, `KeyK`, `KeyL`, `SemiColon`, `Quote`, `BackSlash`, `IntlBackslash`, `KeyZ`, `KeyX`, `KeyC`, `KeyV`, `KeyB`, `KeyN`, `KeyM`, `Comma`, `Dot`, `Slash`, `Insert`, `KpReturn`, `KpMinus`, `KpPlus`, `KpMultiply`, `KpDivide`, `Kp0`, `Kp1`, `Kp2`, `Kp3`, `Kp4`, `Kp5`, `Kp6`, `Kp7`, `Kp8`, `Kp9`, `KpDelete`, `Function`, `Unknown`
+
+</details>
+
+As an example, here is how you can configure `key_config`:
+
+```toml
+key_config = [
+  { event = "press", keys = "return", files = [{ path = "ding.mp3", volume = 1.0 }]] },
+]
+```
+
+- `event`: "press" or "release"
+- `keys`: A regular expression (regex) for matching the keys.
+- `files`: An array of files.
+  - `path`: The absolute path of the file. If the file is embedded in the binary (i.e. if it is inside `sounds/` directory) then it is the name of the file without full path.
+  - `volume`: The volume of the sound. The value 1.0 is the "normal" volume (unfiltered input). Any value other than 1.0 will multiply each sample by this value.
+
+TODO: mention strategy
 
 ## Acknowledgements
 
