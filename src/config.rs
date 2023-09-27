@@ -119,8 +119,10 @@ pub struct KeyConfig {
 #[serde(rename_all = "snake_case")]
 pub enum KeyEvent {
     /// Key press.
+    #[serde(rename = "press")]
     KeyPress,
     /// Key release.
+    #[serde(rename = "release")]
     KeyRelease,
 }
 

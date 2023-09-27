@@ -1,13 +1,13 @@
 [[sound_preset]]
 name = "default"
 key_config = [
-  { event = "key_press", keys = "Return", files = [
+  { event = "press", keys = "Return", files = [
     { path = "ding.mp3", volume = 1.0 },
   ] },
-  { event = "key_press", keys = ".*", files = [
+  { event = "press", keys = ".*", files = [
     { path = "keydown.mp3", volume = 1.0 },
   ] },
-  { event = "key_release", keys = ".*", files = [
+  { event = "release", keys = ".*", files = [
     { path = "keyup.mp3", volume = 1.0 },
   ] },
 ]
@@ -15,10 +15,10 @@ key_config = [
 [[sound_preset]]
 name = "basic"
 key_config = [
-  { event = "key_press", keys = "Return", files = [
+  { event = "press", keys = "Return", files = [
     { path = "newline.mp3" },
   ] },
-  { event = "key_press", keys = ".*", files = [
+  { event = "press", keys = ".*", files = [
     { path = "keystroke.mp3" },
   ] },
 ]
@@ -30,7 +30,7 @@ disabled_keys = ["UpArrow", "DownArrow", "LeftArrow", "RightArrow", "Backspace"]
 [[sound_preset]]
 name = "musicbox"
 key_config = [
-  { event = "key_press", keys = ".*", files = [
+  { event = "press", keys = ".*", files = [
     { path = "mbox1.mp3" },
     { path = "mbox2.mp3" },
     { path = "mbox3.mp3" },
@@ -45,10 +45,10 @@ key_config = [
 [[sound_preset]]
 name = "ducktilo"
 key_config = [
-  { event = "key_press", keys = "Return", files = [
+  { event = "press", keys = "Return", files = [
     { path = "quack2.mp3" },
   ] },
-  { event = "key_press", keys = ".*", files = [
+  { event = "press", keys = ".*", files = [
     { path = "quack1.mp3", volume = 10.0 },
   ] },
 ]
