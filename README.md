@@ -1,7 +1,7 @@
 <div align="center">
 
   <a href="https://github.com/orhun/daktilo">
-    <img src="assets/daktilo-logo.jpeg" width="400">
+    <img src="assets/daktilo-logo.png" width="400">
   </a>
 
 <h4>Turn your keyboard into a typewriter! 📇</h4>
