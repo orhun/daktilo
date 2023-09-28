@@ -54,11 +54,6 @@ jobs:
       - name: Cache Cargo dependencies
         uses: Swatinem/rust-cache@v2
 
-      - name: Run tests
-        run: cargo test --locked --verbose
-        env:
-          OUT_DIR: target
-
       - name: Build the project
         run: cargo build --locked --verbose
 
@@ -67,6 +62,35 @@ jobs:
         with:
           name: daktilo-${{ matrix.build.TARGET }}-assets
           path: target/debug/daktilo*
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@cargo-llvm-cov
+
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      - name: Generate code coverage
+        run: cargo llvm-cov --lcov --output-path lcov.info
+        env:
+          OUT_DIR: target
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          name: code-coverage-report
+          files: lcov.info
+          fail_ci_if_error: true
+          verbose: true
 
   lint:
     name: Lint
