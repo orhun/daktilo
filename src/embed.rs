@@ -41,3 +41,12 @@ impl EmbeddedConfig {
         Ok(toml::from_str(&Self::get_config()?)?)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_embed_config() {
+        assert!(EmbeddedConfig::parse().is_ok());
+    }
+}
