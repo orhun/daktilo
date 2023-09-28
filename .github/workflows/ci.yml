@@ -70,6 +70,17 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            --no-install-recommends \
+            --allow-unauthenticated \
+            libasound2-dev \
+            libxi-dev \
+            libxtst-dev \
+            pkg-config
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
