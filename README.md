@@ -150,7 +150,7 @@ key_config = []
 disabled_keys = []
 ```
 
-As show above, `sound_preset` consists of 2 entries:
+As shown above, `sound_preset` consists of 2 entries:
 
 - `name`: The name of the preset. It will be used in conjunction with `--preset` flag. e.g. `--preset custom`
 - `key_config`: An array of key press/release events for assigning audio files to the specified keys. It can also be used to control the volume etc.
