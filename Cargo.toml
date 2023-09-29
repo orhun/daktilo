@@ -34,7 +34,7 @@ tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 clap = { version = "4.4.6", features = ["derive", "env", "wrap_help", "cargo"] }
 serde = { version = "1.0.188", features = ["derive"] }
 dirs = "5.0.1"
-toml = "0.8.0"
+toml = "0.8.1"
 regex = "1.9.5"
 serde_regex = "1.1.0"
 colored = "2.0.4"
