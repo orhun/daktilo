@@ -1,0 +1,12 @@
+# configuration for https://github.com/MarcoIeni/release-plz
+
+[workspace]
+allow_dirty = false
+changelog_config = "cliff.toml"
+changelog_update = true
+dependencies_update = false
+git_release_enable = false
+git_tag_enable = true
+pr_labels = ["release"]
+publish_allow_dirty = false
+semver_check = false
