@@ -13,6 +13,10 @@ default-run = "daktilo"
 rust-version = "1.70.0"
 edition = "2021"
 
+[package.metadata.wix]
+upgrade-guid = "51610A8E-55C9-4F49-8C9F-3529499D5C60"
+path-guid = "2198A7FB-5F3C-4FAB-B253-2314115AD2DD"
+
 [[bin]]
 name = "daktilo-completions"
 path = "src/bin/completions.rs"
@@ -65,3 +69,32 @@ strip = true
 [profile.bench]
 opt-level = 3
 debug = false
+
+# The profile that 'cargo dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+
+# Config for 'cargo dist'
+[workspace.metadata.dist]
+# The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
+cargo-dist-version = "0.3.1"
+# CI backends to support
+ci = ["github"]
+# The installers to generate for each app
+installers = ["shell", "powershell", "homebrew", "msi"]
+# A GitHub repo to push Homebrew formulas to
+tap = "orhun/daktilo"
+# Target platforms to build apps for (Rust target-triple syntax)
+targets = [
+  "x86_64-unknown-linux-gnu",
+  "aarch64-apple-darwin",
+  "x86_64-apple-darwin",
+  "x86_64-pc-windows-msvc",
+]
+# Publish jobs to run in CI
+publish-jobs = ["homebrew"]
+# Publish jobs to run in CI
+pr-run-mode = "upload"
+# Ignore out-of-date contents
+allow-dirty = ["ci", "msi"]
