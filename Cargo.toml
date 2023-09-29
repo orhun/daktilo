@@ -40,7 +40,7 @@ serde_regex = "1.1.0"
 colored = "2.0.4"
 clap_complete = "4.4.3"
 clap_mangen = "0.2.14"
-fastrand = "2.0.0"
+fastrand = "2.0.1"
 
 [dev-dependencies]
 pretty_assertions = "1.4.0"
