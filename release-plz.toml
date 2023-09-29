@@ -4,7 +4,7 @@
 allow_dirty = false
 changelog_config = "cliff.toml"
 changelog_update = true
-dependencies_update = false
+dependencies_update = true
 git_release_enable = false
 git_tag_enable = true
 pr_labels = ["release"]
