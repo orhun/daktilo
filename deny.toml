@@ -12,6 +12,7 @@ allow = [
     "MPL-2.0",
     "ISC",
     "BSD-3-Clause",
+    "Zlib",
 ]
 
 [sources]
