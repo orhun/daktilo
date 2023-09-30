@@ -14,7 +14,11 @@
 <a href="https://github.com/orhun/daktilo/actions?query=workflow%3A%22Release%22"><img src="https://img.shields.io/github/actions/workflow/status/orhun/daktilo/release.yml?style=flat&amp;labelColor=1D272B&amp;color=819188&amp;logo=GitHub%20Actions&amp;logoColor=white&amp;label=release" alt="Continuous Deployment"></a>
 <a href="https://docs.rs/daktilo/"><img src="https://img.shields.io/docsrs/daktilo?style=flat&amp;labelColor=1D272B&amp;color=819188&amp;logo=Rust&amp;logoColor=white" alt="Documentation"></a>
 
+<!-- {% comment %} -->
+
 <video src="https://github.com/orhun/daktilo/assets/24392180/e523662e-8dcc-421c-a8f6-d396d9762e6b" alt="daktilo demo">
+
+<!-- {% endcomment %} -->
 
 </div>
 
