@@ -30,7 +30,7 @@ rdev = { version = "0.5.3", features = ["serialize"] }
 rodio = { version = "0.17.1", default-features = false, features = [
   "symphonia-mp3",
 ] }
-rust-embed = { version = "8.0.0", features = ["debug-embed"] }
+rust-embed = { version = "8.0.0", features = ["debug-embed", "compression"] }
 thiserror = "1.0.49"
 tokio = { version = "1.32.0", features = ["full"] }
 tracing = "0.1.37"
