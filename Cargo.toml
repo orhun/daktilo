@@ -82,7 +82,7 @@ cargo-dist-version = "0.3.1"
 # CI backends to support
 ci = ["github"]
 # The installers to generate for each app
-installers = ["shell", "powershell", "homebrew", "msi"]
+installers = ["shell", "powershell", "msi"]
 # A GitHub repo to push Homebrew formulas to
 tap = "orhun/daktilo"
 # Target platforms to build apps for (Rust target-triple syntax)
