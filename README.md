@@ -14,6 +14,8 @@
 <a href="https://github.com/orhun/daktilo/actions?query=workflow%3A%22Release%22"><img src="https://img.shields.io/github/actions/workflow/status/orhun/daktilo/release.yml?style=flat&amp;labelColor=1D272B&amp;color=819188&amp;logo=GitHub%20Actions&amp;logoColor=white&amp;label=release" alt="Continuous Deployment"></a>
 <a href="https://docs.rs/daktilo/"><img src="https://img.shields.io/docsrs/daktilo?style=flat&amp;labelColor=1D272B&amp;color=819188&amp;logo=Rust&amp;logoColor=white" alt="Documentation"></a>
 
+<img src="./assets/daktilo-demo.mp4" alt="daktilo demo">
+
 </div>
 
 **daktilo** ("typewriter" in Turkish, pronounced _"duck-til-oh"_) is a small command-line program that plays typewriter sounds every time you press a key. It also offers the flexibility to customize keypress sounds to your liking. You can use the built-in sound presets to create an enjoyable typing experience, whether you're crafting emails or up to some prank on your boss.
