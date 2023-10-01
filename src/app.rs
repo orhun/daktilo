@@ -140,6 +140,7 @@ impl App {
     }
 }
 
+#[cfg(feature = "audio-tests")]
 #[cfg(test)]
 mod tests {
     use super::*;
