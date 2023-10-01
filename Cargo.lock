@@ -475,7 +475,7 @@ dependencies = [
 
 [[package]]
 name = "daktilo"
-version = "0.1.0-alpha.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "clap",
  "clap_complete",
