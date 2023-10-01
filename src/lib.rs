@@ -46,7 +46,7 @@ pub async fn run(sound_preset: SoundPreset) -> Result<()> {
     // Handle events.
     loop {
         if let Some(event) = receiver.recv().await {
-            app.handle_event(event)?;
+            app.handle_key_event(event)?;
         }
     }
 }

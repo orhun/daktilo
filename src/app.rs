@@ -40,7 +40,7 @@ impl App {
     }
 
     /// Handle the key events.
-    pub fn handle_event(&mut self, event: Event) -> Result<()> {
+    pub fn handle_key_event(&mut self, event: Event) -> Result<()> {
         match event.event_type {
             EventType::KeyPress(key) | EventType::KeyRelease(key) => {
                 tracing::debug!("Event: {:?}", event);
@@ -79,7 +79,7 @@ impl App {
     }
 
     /// Handle the key press event.
-    pub fn handle_key_press(&mut self, key_config: &Option<KeyConfig>) -> Result<()> {
+    fn handle_key_press(&mut self, key_config: &Option<KeyConfig>) -> Result<()> {
         if self.key_released {
             if let Some(key_config) = key_config {
                 let file = self.pick_sound_file(key_config)?;
@@ -91,7 +91,7 @@ impl App {
     }
 
     /// Handle the key release event.
-    pub fn handle_key_release(&mut self, key_config: &Option<KeyConfig>) -> Result<()> {
+    fn handle_key_release(&mut self, key_config: &Option<KeyConfig>) -> Result<()> {
         if let Some(key_config) = key_config {
             let file = self.pick_sound_file(key_config)?;
             self.play_sound(&file, &self.key_release_sink)?;
@@ -136,6 +136,69 @@ impl App {
             sink.set_volume(file.volume.unwrap_or(1.0));
             sink.append(Decoder::new(sound)?);
         };
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rdev::Key;
+    use regex::Regex;
+    use std::{
+        thread,
+        time::{Duration, SystemTime},
+    };
+
+    #[test]
+    fn test_handle_key_event() -> Result<()> {
+        let ding_audio = AudioFile {
+            path: String::from("ding.mp3"),
+            volume: None,
+        };
+        let quack_audio = AudioFile {
+            path: String::from("quack1.mp3"),
+            volume: None,
+        };
+        let key_config = vec![
+            KeyConfig {
+                event: KeyEvent::KeyPress,
+                keys: Regex::new("Space")?,
+                files: vec![ding_audio.clone()],
+                strategy: None,
+            },
+            KeyConfig {
+                event: KeyEvent::KeyRelease,
+                keys: Regex::new(".*")?,
+                files: vec![quack_audio.clone()],
+                strategy: None,
+            },
+        ];
+        let sound_preset = SoundPreset {
+            name: String::new(),
+            key_config: key_config.clone(),
+            disabled_keys: None,
+        };
+        let mut app = App::init(sound_preset)?;
+        assert_eq!(ding_audio, app.pick_sound_file(&key_config[0])?);
+        assert_eq!(quack_audio, app.pick_sound_file(&key_config[1])?);
+
+        app.handle_key_event(Event {
+            time: SystemTime::now(),
+            name: None,
+            event_type: EventType::KeyPress(Key::Space),
+        })?;
+        assert_eq!(1, app.key_press_sink.len());
+        app.handle_key_event(Event {
+            time: SystemTime::now(),
+            name: None,
+            event_type: EventType::KeyRelease(Key::KeyQ),
+        })?;
+        assert_eq!(1, app.key_press_sink.len());
+
+        thread::sleep(Duration::from_millis(2000));
+        assert_eq!(0, app.key_press_sink.len());
+
         Ok(())
     }
 }

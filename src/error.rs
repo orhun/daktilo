@@ -34,7 +34,7 @@ pub enum Error {
     /// Error that may occur when attempting to interpret a sequence of u8 as a
     /// string.
     #[error("UTF-8 error: `{0}`")]
-    Utf8Error(#[from] std::str::Utf8Error),
+    Utf8(#[from] std::str::Utf8Error),
 
     /// Error that may occur when a preset is not found.
     #[error("Preset not found: `{0}`")]
@@ -43,6 +43,10 @@ pub enum Error {
     /// Error that may occur when no audio files are given.
     #[error("No audio files to play")]
     NoAudioFiles,
+
+    /// Error that may occur when parsing regexes.
+    #[error("Regex: `{0}`")]
+    Regex(#[from] regex::Error),
 }
 
 /// Type alias for the standard [`Result`] type.

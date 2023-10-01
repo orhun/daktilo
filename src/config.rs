@@ -127,7 +127,7 @@ pub enum KeyEvent {
 }
 
 /// Audio file configuration.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 pub struct AudioFile {
     /// Path of the file.
     pub path: String,
