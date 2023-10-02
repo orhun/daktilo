@@ -32,6 +32,8 @@ Now you can recreate this moment without the actual need for a physical typewrit
 - [Getting Started](#getting-started)
 - [Installation](#installation)
   - [Cargo](#cargo)
+  - [Binary releases](#binary-releases)
+  - [Build from source](#build-from-source)
 - [Usage](#usage)
 - [Configuration](#configuration)
   - [Adding custom presets](#adding-custom-presets)
@@ -87,6 +89,26 @@ cargo install daktilo
 ```
 
 The minimum supported Rust version is `1.70.0`.
+
+### Binary releases
+
+See the available binaries for different targets from the [releases page](https://github.com/orhun/daktilo/releases).
+
+### Build from source
+
+1. Clone the repository.
+
+```sh
+git clone https://github.com/orhun/daktilo && cd daktilo/
+```
+
+2. Build.
+
+```sh
+CARGO_TARGET_DIR=target cargo build --release
+```
+
+Binary will be located at `target/release/daktilo`.
 
 ## Usage
 
