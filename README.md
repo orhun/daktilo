@@ -32,6 +32,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
 - [Getting Started](#getting-started)
 - [Installation](#installation)
   - [Cargo](#cargo)
+  - [Arch Linux](#arch-linux)
   - [Binary releases](#binary-releases)
   - [Build from source](#build-from-source)
 - [Usage](#usage)
@@ -89,6 +90,14 @@ cargo install daktilo
 ```
 
 The minimum supported Rust version is `1.70.0`.
+
+### Arch Linux
+
+**daktilo** can be installed from the [official repositories](https://archlinux.org/packages/extra/x86_64/daktilo/) using [pacman](https://wiki.archlinux.org/title/Pacman):
+
+```sh
+pacman -S daktilo
+```
 
 ### Binary releases
 
