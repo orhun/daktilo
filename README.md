@@ -18,7 +18,7 @@
 
 </div>
 
-**daktilo** ("typewriter" in Turkish, pronounced _"duck-til-oh"_) is a small command-line program that plays typewriter sounds every time you press a key. It also offers the flexibility to customize keypress sounds to your liking. You can use the built-in sound presets to create an enjoyable typing experience, whether you're crafting emails or up to some prank on your boss.
+**daktilo** ("typewriter" in Turkish, pronounced _"duck-til-oh"_, derived from the Ancient Greek word [δάκτυλος](https://lsj.gr/wiki/%CE%B4%CE%AC%CE%BA%CF%84%CF%85%CE%BB%CE%BF%CF%82) for "finger") is a small command-line program that plays typewriter sounds every time you press a key. It also offers the flexibility to customize keypress sounds to your liking. You can use the built-in sound presets to create an enjoyable typing experience, whether you're crafting emails or up to some prank on your boss.
 
 ✨ Inspiration: ["Taking notes in class with my typewriter"](https://www.youtube.com/watch?v=Bs5TEuZPQl8)
 
