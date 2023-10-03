@@ -199,7 +199,7 @@ As an example, here is how you can configure `key_config`:
 
 ```toml
 key_config = [
-  { event = "press", keys = "return", files = [{ path = "ding.mp3", volume = 1.0 }] },
+  { event = "press", keys = "Return", files = [{ path = "ding.mp3", volume = 1.0 }] },
 ]
 ```
 
