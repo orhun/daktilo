@@ -79,17 +79,16 @@ key_config = [
 name = "drumkit"
 key_config = [
   { event = "press", keys = ".*", files = [
-    { path = "kick.mp3", volume = 1.0 },
-    { path = "hat.mp3", volume = 1.0 },
-	{ path = "snare.mp3", volume = 1.0 },
-	{ path = "kick.mp3", volume = 1.0 },
-	{ path = "hat.mp3", volume = 1.0 },
-	{ path = "kick.mp3", volume = 1.0 },
-	{ path = "snare.mp3", volume = 1.0 },
-	{ path = "hat.mp3", volume = 1.0 },
+    { path = "kick.mp3" },
+    { path = "hat.mp3" },
+    { path = "snare.mp3" },
+    { path = "kick.mp3" },
+    { path = "hat.mp3" },
+    { path = "kick.mp3" },
+    { path = "snare.mp3" },
+    { path = "hat.mp3" },
   ], strategy = "sequential" },
 ]
-disabled_keys = []
 
 # Here is how you can define your custom preset:
 # [[sound_preset]]
