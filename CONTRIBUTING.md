@@ -6,11 +6,16 @@ Reading and following these guidelines will help us make the contribution proces
 
 ## Quicklinks
 
+<!-- vim-markdown-toc GFM -->
+
 - [Code of Conduct](#code-of-conduct)
 - [Getting Started](#getting-started)
   - [Issues](#issues)
   - [Pull Requests](#pull-requests)
+  - [How to add new presets?](#how-to-add-new-presets)
 - [License](#license)
+
+<!-- vim-markdown-toc -->
 
 ## Code of Conduct
 
@@ -89,6 +94,20 @@ cargo clippy --verbose -- -D warnings
 10. Wait for approval from the repository owners. Discuss the possible changes and update your PR if necessary.
 
 11. The PR will be merged once you have the sign-off of the repository owners.
+
+### How to add new presets?
+
+I'm glad you asked!
+
+1. Add your sound files to [`sounds/`](sounds/). Currently, only the [MP3](https://en.wikipedia.org/wiki/MP3) format is supported.
+
+2. Configure the preset in [`config/daktilo.toml`](./config/daktilo.toml). See [adding custom presets](README.md#adding-custom-presets).
+
+3. Update [`README.md`](README.md) about the availability of this new preset.
+
+4. Create a pull request. See above.
+
+5. Profit.
 
 ## License
 
