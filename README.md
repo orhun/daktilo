@@ -38,6 +38,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
 - [Usage](#usage)
 - [Configuration](#configuration)
   - [Adding custom presets](#adding-custom-presets)
+- [Similar Projects](#similar-projects)
 - [Acknowledgements](#acknowledgements)
 - [Donations](#donations)
 - [License](#license)
@@ -259,6 +260,11 @@ key_config = [
 # Disabled keys that won't trigger any sound events
 disabled_keys = ["CapsLock", "NumLock"]
 ```
+
+## Similar Projects
+
+- [`bucklespring`](https://github.com/zevv/bucklespring): Nostalgia bucklespring keyboard sound
+- [`selectric-mode`](https://github.com/rbanffy/selectric-mode): Make your Emacs sound like a proper typewriter
 
 ## Acknowledgements
 
