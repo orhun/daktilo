@@ -34,6 +34,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
 - [Installation](#installation)
   - [Cargo](#cargo)
   - [Arch Linux](#arch-linux)
+  - [Alpine Linux](#alpine-linux)
   - [Binary releases](#binary-releases)
   - [Build from source](#build-from-source)
 - [Usage](#usage)
@@ -109,6 +110,14 @@ The minimum supported Rust version is `1.70.0`.
 
 ```sh
 pacman -S daktilo
+```
+
+### Alpine Linux
+
+**daktilo** is available for [Alpine Edge](https://pkgs.alpinelinux.org/packages?name=daktilo&branch=edge). It can be installed via [apk](https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper) after enabling the [testing repository](https://wiki.alpinelinux.org/wiki/Repositories).
+
+```sh
+apk add daktilo
 ```
 
 ### Binary releases
