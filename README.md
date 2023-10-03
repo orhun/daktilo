@@ -42,6 +42,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
 - [Similar Projects](#similar-projects)
 - [Acknowledgements](#acknowledgements)
 - [Donations](#donations)
+- [Contributing](#contributing)
 - [License](#license)
 - [Copyright](#copyright)
 
@@ -288,6 +289,12 @@ Kudos! 👾
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dorhunp%26type%3Dpledges&style=flat&logo=Patreon&labelColor=1D272B&color=819188&logoColor=white&label=)](https://patreon.com/join/orhunp)
 
 If you find **daktilo** and/or other projects on my [GitHub](https://github.com/orhun) useful, consider supporting me on [GitHub Sponsors](https://github.com/sponsors/orhun) or [becoming a patron](https://www.patreon.com/join/orhunp)!
+
+## Contributing
+
+See our [Contribution Guide](./CONTRIBUTING.md) and please follow the [Code of Conduct](./CODE_OF_CONDUCT.md) in all your interactions with the project.
+
+Also, see how you can add new presets [here](CONTRIBUTING.md#how-to-add-new-presets).
 
 ## License
 
