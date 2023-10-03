@@ -30,6 +30,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
 <!-- vim-markdown-toc GFM -->
 
 - [Getting Started](#getting-started)
+- [Supported Platforms](#supported-platforms)
 - [Installation](#installation)
   - [Cargo](#cargo)
   - [Arch Linux](#arch-linux)
@@ -72,6 +73,14 @@ To use a preset:
 ```sh
 daktilo --preset musicbox
 ```
+
+## Supported Platforms
+
+- [x] Linux
+  - [x] X11
+  - [ ] Wayland[\*](https://github.com/Narsil/rdev#linux)
+- [x] Windows
+- [x] MacOS
 
 ## Installation
 
