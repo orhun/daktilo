@@ -59,6 +59,7 @@ There are also different presets available:
 | `basic`     | an alternative and more basic typewriter effect |
 | `musicbox`  | plays random notes like a music box             |
 | `ducktilo`  | quack quack 🦆                                  |
+| `drumkit`   | dum, tss, cha! 🥁                               |
 
 To list the presets:
 
