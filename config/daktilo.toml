@@ -73,6 +73,23 @@ key_config = [
   ] },
 ]
 
+# Drumkit
+# Dum, tss, cha!
+[[sound_preset]]
+name = "drumkit"
+key_config = [
+  { event = "press", keys = ".*", files = [
+    { path = "kick.mp3" },
+    { path = "hat.mp3" },
+    { path = "snare.mp3" },
+    { path = "kick.mp3" },
+    { path = "hat.mp3" },
+    { path = "kick.mp3" },
+    { path = "snare.mp3" },
+    { path = "hat.mp3" },
+  ], strategy = "sequential" },
+]
+
 # Here is how you can define your custom preset:
 # [[sound_preset]]
 # # Custom sound preset named "custom"
