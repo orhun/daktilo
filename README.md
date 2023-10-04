@@ -104,6 +104,12 @@ cargo install daktilo
 
 The minimum supported Rust version is `1.70.0`.
 
+On Linux, the following packages should be installed:
+
+- Arch Linux: `alsa-lib libxtst libxi`
+- Alpine Linux: `alsa-lib-dev libxi-dev libxtst-dev`
+- Debian/Ubuntu: `libasound2-dev libxi-dev libxtst-dev`
+
 ### Arch Linux
 
 **daktilo** can be installed from the [official repositories](https://archlinux.org/packages/extra/x86_64/daktilo/) using [pacman](https://wiki.archlinux.org/title/Pacman):
