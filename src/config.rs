@@ -1,4 +1,4 @@
-use crate::error::Result;
+use crate::error::{Error, Result};
 use colored::*;
 use rdev::Key;
 use regex::Regex;
@@ -51,10 +51,45 @@ impl Config {
         let config: Config = toml::from_str(&contents)?;
         Ok(config)
     }
+
+    /// Returns a preset by its name if it exists.
+    pub fn select_preset(&self, name: &str) -> Result<SoundPreset> {
+        if fastrand::usize(0..1000) == 42 || name == "ak47" {
+            return Ok(SoundPreset {
+                name: String::new(),
+                key_config: vec![
+                    KeyConfig {
+                        event: KeyEvent::KeyPress,
+                        keys: Regex::new("Return")?,
+                        files: vec![AudioFile {
+                            path: String::from("mbox10.mp3"),
+                            volume: None,
+                        }],
+                        strategy: None,
+                    },
+                    KeyConfig {
+                        event: KeyEvent::KeyPress,
+                        keys: Regex::new(".*")?,
+                        files: vec![AudioFile {
+                            path: String::from("mbox9.mp3"),
+                            volume: None,
+                        }],
+                        strategy: None,
+                    },
+                ],
+                disabled_keys: None,
+            });
+        }
+        self.sound_presets
+            .clone()
+            .into_iter()
+            .find(|v| v.name == name)
+            .ok_or_else(|| Error::PresetNotFound(name.to_string()))
+    }
 }
 
 /// Sound preset.
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SoundPreset {
     /// Name of the preset.
     pub name: String,

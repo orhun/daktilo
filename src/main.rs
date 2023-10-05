@@ -5,7 +5,7 @@ use tracing::Level;
 use daktilo::args::Args;
 use daktilo::config::{Config, DEFAULT_CONFIG};
 use daktilo::embed::EmbeddedConfig;
-use daktilo::error::{Error, Result};
+use daktilo::error::Result;
 use daktilo::logger;
 
 #[tokio::main]
@@ -43,11 +43,7 @@ async fn main() -> Result<()> {
         return Ok(());
     }
     let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
-    let preset = config
-        .sound_presets
-        .into_iter()
-        .find(|v| v.name == preset_name)
-        .ok_or_else(|| Error::PresetNotFound(preset_name))?;
+    let preset = config.select_preset(&preset_name)?;
     match daktilo::run(preset).await {
         Ok(_) => process::exit(0),
         Err(e) => {
