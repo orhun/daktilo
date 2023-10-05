@@ -96,7 +96,7 @@ daktilo --preset musicbox
 
 ### Cargo
 
-**daktilo** can be installed from [crates.io](https://crates.io/crates/daktilo):
+**daktilo** can be installed from [crates.io](https://crates.io/crates/daktilo) using [`cargo`](https://doc.rust-lang.org/cargo/) if [Rust](https://www.rust-lang.org/tools/install) is installed.
 
 ```sh
 cargo install daktilo
