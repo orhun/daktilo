@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2023-10-05
+
+### 🐛 Bug Fixes
+
+- *(cd)* Use a custom token for triggering release workflow - ([0f8dcdc](https://github.com/orhun/daktilo/commit/0f8dcdcf2955577535bec8fa4da81bfca7aca7f5))
+
+### 🚜 Refactor
+
+- *(config)* Refactor preset selection logic - ([7f1e055](https://github.com/orhun/daktilo/commit/7f1e055dd91b9081cd5ffdc92889da8392caa630))
+
+### 📚 Documentation
+
+- *(readme)* Give more details about cargo ([#30](https://github.com/orhun/daktilo/pull/30)) - ([91c8e94](https://github.com/orhun/daktilo/commit/91c8e94567b942a37c32d21e141aa5d337c837fa))
+- *(release)* Update release instructions - ([59101b5](https://github.com/orhun/daktilo/commit/59101b5aefa7eb788eb5aaa756f98012dd069eb6))
+- *(security)* Update security policy for the new versions - ([73b12dc](https://github.com/orhun/daktilo/commit/73b12dcaeb07ab152593c8443ac3fc4f486fde5b))
+
 ## [0.2.0] - 2023-10-04
 
 ### 📇 Features
