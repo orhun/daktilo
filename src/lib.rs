@@ -27,7 +27,7 @@ use rdev::listen;
 use std::thread;
 
 /// Starts the typewriter.
-pub async fn run(sound_preset: SoundPreset) -> Result<()> {
+pub async fn run(sound_preset: SoundPreset, device: Option<String>) -> Result<()> {
     // Create a listener for the keyboard events.
     let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
     thread::spawn(move || {
@@ -41,7 +41,7 @@ pub async fn run(sound_preset: SoundPreset) -> Result<()> {
 
     // Create the application state.
     tracing::debug!("{:#?}", sound_preset);
-    let mut app = App::init(sound_preset)?;
+    let mut app = App::init(sound_preset, device)?;
 
     // Handle events.
     loop {

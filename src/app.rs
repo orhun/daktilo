@@ -4,7 +4,7 @@ use crate::{
     error::{Error, Result},
 };
 use rdev::{Event, EventType};
-use rodio::{Decoder, OutputStream, Sink};
+use rodio::{cpal::traits::HostTrait, Decoder, DeviceTrait, OutputStream, Sink};
 use std::{fs::File, io::BufReader};
 
 /// Application state controller.
@@ -25,8 +25,22 @@ pub struct App {
 
 impl App {
     /// Initializes a new instance.
-    pub fn init(preset: SoundPreset) -> Result<Self> {
-        let (stream, handle) = OutputStream::try_default()?;
+    pub fn init(preset: SoundPreset, device: Option<String>) -> Result<Self> {
+        let device = match device {
+            Some(ref device) => rodio::cpal::default_host()
+                .output_devices()?
+                .find(|v| v.name().unwrap_or_default().to_lowercase() == *device),
+            None => rodio::cpal::default_host().default_output_device(),
+        }
+        .ok_or_else(|| {
+            Error::DeviceNotFound(
+                device
+                    .unwrap_or_else(|| String::from("default"))
+                    .to_string(),
+            )
+        })?;
+        tracing::debug!("Using output device: {}", device.name()?);
+        let (stream, handle) = OutputStream::try_from_device(&device)?;
         let key_press_sink = Sink::try_new(&handle)?;
         let key_release_sink = Sink::try_new(&handle)?;
         Ok(Self {

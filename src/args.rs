@@ -38,8 +38,14 @@ pub struct Args {
     #[arg(short, long, env)]
     pub preset: Option<String>,
     /// Lists the available presets.
-    #[arg(short, long, alias = "ls")]
-    pub list: bool,
+    #[arg(short, long, aliases = vec!["ls", "list"])]
+    pub list_presets: bool,
+    /// Lists the available output devices.
+    #[arg(long)]
+    pub list_devices: bool,
+    /// Sets the device for playback.
+    #[arg(short, long, env = "DAKTILO_DEVICE", value_name = "DEVICE")]
+    pub device: Option<String>,
     /// Sets the configuration file.
     #[arg(short, long, env = "DAKTILO_CONFIG", value_name = "PATH")]
     pub config: Option<PathBuf>,

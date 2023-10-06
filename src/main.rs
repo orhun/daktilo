@@ -1,4 +1,7 @@
 use clap::Parser;
+use colored::*;
+use rodio::cpal::traits::HostTrait;
+use rodio::DeviceTrait;
 use std::{fs, process};
 use tracing::Level;
 
@@ -34,17 +37,26 @@ async fn main() -> Result<()> {
     tracing::debug!("{:#?}", config);
 
     // Start the typewriter.
-    if args.list {
-        tracing::info!("Listing the presets:");
+    if args.list_presets {
+        tracing::info!("Available presets:");
         config
             .sound_presets
             .iter()
             .for_each(|preset| println!("{}", preset));
         return Ok(());
+    } else if args.list_devices {
+        tracing::info!("Available devices:");
+        rodio::cpal::default_host()
+            .output_devices()?
+            .try_for_each::<_, Result<()>>(|v| {
+                println!("• {}", v.name()?.white().bold());
+                Ok(())
+            })?;
+        return Ok(());
     }
     let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
     let preset = config.select_preset(&preset_name)?;
-    match daktilo::run(preset).await {
+    match daktilo::run(preset, args.device).await {
         Ok(_) => process::exit(0),
         Err(e) => {
             tracing::error!("error occurred: {e}");

@@ -19,6 +19,18 @@ pub enum Error {
     #[error("Play error: `{0}`")]
     Play(#[from] rodio::PlayError),
 
+    /// Error that might occur while attempting to enumerate the available devices on a system.
+    #[error("Device error: `{0}`")]
+    Devices(#[from] rodio::DevicesError),
+
+    /// Error that may occur while attempting to retrieve a device name.
+    #[error("Device name error: `{0}`")]
+    DeviceName(#[from] rodio::cpal::DeviceNameError),
+
+    /// Error that may occur when a device is not found.
+    #[error("`{0}` output device not found.")]
+    DeviceNotFound(String),
+
     /// Error that may occur while extracting the embedded content.
     #[error("Embedded error: `{0}`")]
     Embedded(String),

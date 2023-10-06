@@ -68,7 +68,7 @@ There are also different presets available:
 To list the presets:
 
 ```sh
-daktilo --list
+daktilo --list-presets
 ```
 
 To use a preset:
@@ -76,6 +76,14 @@ To use a preset:
 ```sh
 daktilo --preset musicbox
 ```
+
+To use a different output device:
+
+```sh
+daktilo --device pipewire
+```
+
+Also, you can use `--list-devices` to list the available output devices.
 
 ## Supported Platforms
 
@@ -157,7 +165,9 @@ daktilo [OPTIONS]
 ```sh
 -v, --verbose          Enables verbose logging [env: VERBOSE=]
 -p, --preset <PRESET>  Sets the name of the sound preset to use [env: PRESET=]
--l, --list             Lists the available presets
+-l, --list-presets     Lists the available presets
+    --list-devices     Lists the available output devices
+-d, --device <DEVICE>  Sets the device for playback [env: DAKTILO_DEVICE=]
 -c, --config <PATH>    Sets the configuration file [env: DAKTILO_CONFIG=]
 -i, --init             Writes the default configuration file
 -h, --help             Print help
