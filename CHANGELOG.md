@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2023-10-07
+
+### 📇 Features
+
+- *(playback)* Support selecting the output device - ([6bd8269](https://github.com/orhun/daktilo/commit/6bd8269639bd95f5a4386e32f9abc9adf15c12d1))
+
 ## [0.2.1] - 2023-10-05
 
 ### 🐛 Bug Fixes
