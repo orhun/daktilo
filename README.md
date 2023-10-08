@@ -35,6 +35,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
   - [Cargo](#cargo)
   - [Arch Linux](#arch-linux)
   - [Alpine Linux](#alpine-linux)
+  - [MacPorts](#macports)
   - [Binary releases](#binary-releases)
   - [Build from source](#build-from-source)
 - [Usage](#usage)
@@ -133,6 +134,16 @@ pacman -S daktilo
 ```sh
 apk add daktilo
 ```
+
+### MacPorts
+
+On macOS, **daktilo** can be installed via [MacPorts](https://www.macports.org/):
+
+```sh
+sudo port install daktilo
+```
+
+More info [here](https://ports.macports.org/port/daktilo/).
 
 ### Binary releases
 
