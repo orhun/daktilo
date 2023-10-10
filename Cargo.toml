@@ -1,6 +1,6 @@
 [package]
 name = "daktilo"
-version = "0.3.0"
+version = "0.3.1"
 description = "Turn your keyboard into a typewriter! 📇"
 authors = ["Orhun Parmaksız <orhunparmaksiz@gmail.com>"]
 license = "MIT OR Apache-2.0"
