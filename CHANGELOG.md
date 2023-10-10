@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2023-10-10
+
+### 📚 Documentation
+
+- *(readme)* Add MacPorts install info ([#37](https://github.com/orhun/daktilo/pull/37)) - ([33ed3fd](https://github.com/orhun/daktilo/commit/33ed3fd874c76fd24ea59f4c3c5c91f8e64bfa59))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(changelog)* Remove footer from changelog - ([c25044d](https://github.com/orhun/daktilo/commit/c25044d32291f472e1a7d7b988b6708e8cc27ee3))
+
 ## [0.3.0] - 2023-10-07
 
 ### 📇 Features
