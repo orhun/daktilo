@@ -61,11 +61,17 @@ impl Config {
                     KeyConfig {
                         event: KeyEvent::KeyPress,
                         keys: Regex::new("Return")?,
-                        files: vec![AudioFile {
-                            path: String::from("mbox10.mp3"),
-                            volume: None,
-                        }],
-                        strategy: None,
+                        files: vec![
+                            AudioFile {
+                                path: String::from("mbox10.mp3"),
+                                volume: None,
+                            },
+                            AudioFile {
+                                path: String::from("mbox11.mp3"),
+                                volume: None,
+                            },
+                        ],
+                        strategy: Some(PlaybackStrategy::Random),
                     },
                     KeyConfig {
                         event: KeyEvent::KeyPress,
