@@ -35,8 +35,10 @@ pub struct Args {
     #[arg(short, long, env)]
     pub verbose: bool,
     /// Sets the name of the sound preset to use.
-    #[arg(short, long, env)]
-    pub preset: Option<String>,
+    ///
+    /// Can be specified multiple times to play multiple presets at once.
+    #[arg(short, long, env, num_args(0..))]
+    pub preset: Vec<String>,
     /// Lists the available presets.
     #[arg(short, long, aliases = vec!["ls", "list"])]
     pub list_presets: bool,
