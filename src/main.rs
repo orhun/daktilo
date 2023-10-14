@@ -56,7 +56,13 @@ async fn main() -> Result<()> {
     }
     let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
     let preset = config.select_preset(&preset_name)?;
-    match daktilo::run(preset, args.device).await {
+    match daktilo::run(
+        preset,
+        args.sound_variation_args.map(|v| v.into()),
+        args.device,
+    )
+    .await
+    {
         Ok(_) => process::exit(0),
         Err(e) => {
             tracing::error!("error occurred: {e}");

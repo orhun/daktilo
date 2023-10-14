@@ -1,5 +1,5 @@
 use crate::{
-    config::{AudioFile, KeyConfig, KeyEvent, PlaybackStrategy, SoundPreset},
+    config::{AudioFile, KeyConfig, KeyEvent, PlaybackStrategy, SoundPreset, SoundVariation},
     embed::EmbeddedSound,
     error::{Error, Result},
 };
@@ -21,11 +21,17 @@ pub struct App {
     key_released: bool,
     /// Index of the file to play.
     file_index: usize,
+    /// Sound variations.
+    variation: Option<SoundVariation>,
 }
 
 impl App {
     /// Initializes a new instance.
-    pub fn init(preset: SoundPreset, device: Option<String>) -> Result<Self> {
+    pub fn init(
+        preset: SoundPreset,
+        variation: Option<SoundVariation>,
+        device: Option<String>,
+    ) -> Result<Self> {
         let device = match device {
             Some(ref device) => rodio::cpal::default_host()
                 .output_devices()?
@@ -50,6 +56,7 @@ impl App {
             key_release_sink,
             key_released: true,
             file_index: 0,
+            variation,
         })
     }
 
@@ -97,7 +104,7 @@ impl App {
         if self.key_released {
             if let Some(key_config) = key_config {
                 let file = self.pick_sound_file(key_config)?;
-                self.play_sound(&file, &self.key_press_sink)?;
+                self.play_sound(&file, self.get_variation(key_config), &self.key_press_sink)?;
             }
         }
         self.key_released = false;
@@ -108,7 +115,11 @@ impl App {
     fn handle_key_release(&mut self, key_config: &Option<KeyConfig>) -> Result<()> {
         if let Some(key_config) = key_config {
             let file = self.pick_sound_file(key_config)?;
-            self.play_sound(&file, &self.key_release_sink)?;
+            self.play_sound(
+                &file,
+                self.get_variation(key_config),
+                &self.key_release_sink,
+            )?;
         }
         self.key_released = true;
         Ok(())
@@ -137,20 +148,49 @@ impl App {
     }
 
     /// Play the sound from embedded/file for the given sink.
-    fn play_sound(&self, file: &AudioFile, sink: &Sink) -> Result<()> {
+    fn play_sound(
+        &self,
+        file: &AudioFile,
+        variation: Option<SoundVariation>,
+        sink: &Sink,
+    ) -> Result<()> {
         tracing::debug!("Playing: {:?}", file);
+
+        let volume = file.volume.unwrap_or(1.0)
+            * self.generate_variation_factor(variation.as_ref().and_then(|v| v.volume));
+        let tempo = self.generate_variation_factor(variation.as_ref().and_then(|v| v.tempo));
+        tracing::debug!("Volume: {}, Tempo: {}", volume, tempo);
+
+        sink.stop();
+        sink.set_volume(volume);
+        sink.set_speed(tempo);
+
         if let Some(embed_data) = EmbeddedSound::get_sound(&file.path) {
             let sound = BufReader::new(Box::new(embed_data));
-            sink.stop();
-            sink.set_volume(file.volume.unwrap_or(1.0));
             sink.append(Decoder::new(sound)?);
         } else {
             let sound = BufReader::new(Box::new(File::open(&file.path)?));
-            sink.stop();
-            sink.set_volume(file.volume.unwrap_or(1.0));
             sink.append(Decoder::new(sound)?);
         };
         Ok(())
+    }
+
+    /// Get variation for the given key.
+    fn get_variation(&self, key: &KeyConfig) -> Option<SoundVariation> {
+        self.variation
+            .clone()
+            .or(key.variation.clone())
+            .or(self.preset.variation.clone())
+    }
+
+    /// Generate variation factor
+    fn generate_variation_factor(&self, variation: Option<(f32, f32)>) -> f32 {
+        let Some((plus, minus)) = variation else {
+            return 1.0;
+        };
+
+        let variation = fastrand::f32() * (plus + minus) - minus;
+        1.0 + variation
     }
 }
 

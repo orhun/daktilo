@@ -21,13 +21,17 @@ pub mod app;
 pub mod config;
 
 use app::App;
-use config::SoundPreset;
+use config::{SoundPreset, SoundVariation};
 use error::Result;
 use rdev::listen;
 use std::thread;
 
 /// Starts the typewriter.
-pub async fn run(sound_preset: SoundPreset, device: Option<String>) -> Result<()> {
+pub async fn run(
+    sound_preset: SoundPreset,
+    variation: Option<SoundVariation>,
+    device: Option<String>,
+) -> Result<()> {
     // Create a listener for the keyboard events.
     let (sender, mut receiver) = tokio::sync::mpsc::unbounded_channel();
     thread::spawn(move || {
@@ -41,7 +45,7 @@ pub async fn run(sound_preset: SoundPreset, device: Option<String>) -> Result<()
 
     // Create the application state.
     tracing::debug!("{:#?}", sound_preset);
-    let mut app = App::init(sound_preset, device)?;
+    let mut app = App::init(sound_preset, variation, device)?;
 
     // Handle events.
     loop {

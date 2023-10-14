@@ -72,6 +72,7 @@ impl Config {
                             },
                         ],
                         strategy: Some(PlaybackStrategy::Random),
+                        variation: None,
                     },
                     KeyConfig {
                         event: KeyEvent::KeyPress,
@@ -81,9 +82,14 @@ impl Config {
                             volume: None,
                         }],
                         strategy: None,
+                        variation: Some(SoundVariation {
+                            pitch: Some((0.5, 0.5)),
+                            ..Default::default()
+                        }),
                     },
                 ],
                 disabled_keys: None,
+                variation: None,
             });
         }
         self.sound_presets
@@ -103,6 +109,8 @@ pub struct SoundPreset {
     pub key_config: Vec<KeyConfig>,
     /// List of disabled keys.
     pub disabled_keys: Option<Vec<Key>>,
+    /// Configure sound variations.
+    pub variation: Option<SoundVariation>,
 }
 
 impl fmt::Display for SoundPreset {
@@ -153,6 +161,8 @@ pub struct KeyConfig {
     pub files: Vec<AudioFile>,
     /// Playback strategy.
     pub strategy: Option<PlaybackStrategy>,
+    /// Sound variations. Overrides the preset sound variations.
+    pub variation: Option<SoundVariation>,
 }
 
 /// Key event type.
@@ -184,6 +194,18 @@ pub enum PlaybackStrategy {
     Random,
     /// Play sequentially.
     Sequential,
+}
+
+/// Sound variation configuration.
+#[derive(Default, Clone, Debug, Serialize, Deserialize, PartialEq)]
+#[serde(rename_all = "snake_case")]
+pub struct SoundVariation {
+    /// Volume +/- in percent.
+    pub volume: Option<(f32, f32)>,
+    /// Pitch +/- in percent.
+    pub pitch: Option<(f32, f32)>,
+    /// Tempo +/- in percent.
+    pub tempo: Option<(f32, f32)>,
 }
 
 #[cfg(test)]
