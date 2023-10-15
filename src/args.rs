@@ -54,6 +54,9 @@ pub struct Args {
     /// Writes the default configuration file.
     #[arg(short, long)]
     pub init: bool,
+    /// Disables the easter eggs.
+    #[arg(long, hide = true)]
+    pub no_surprises: bool,
 }
 
 #[cfg(test)]

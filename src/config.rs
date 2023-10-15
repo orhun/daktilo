@@ -18,6 +18,9 @@ pub struct Config {
     /// Sound presets.
     #[serde(rename = "sound_preset")]
     pub sound_presets: Vec<SoundPreset>,
+    /// Disable the easter eggs.
+    #[serde(rename = "no_surprises", default)]
+    pub disable_easter_eggs: bool,
 }
 
 impl Config {
@@ -54,7 +57,7 @@ impl Config {
 
     /// Returns a preset by its name if it exists.
     pub fn select_preset(&self, name: &str) -> Result<SoundPreset> {
-        if fastrand::usize(0..1000) == 42 || name == "ak47" {
+        if !self.disable_easter_eggs && fastrand::usize(0..1000) == 42 || name == "ak47" {
             return Ok(SoundPreset {
                 name: String::new(),
                 key_config: vec![
