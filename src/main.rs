@@ -56,16 +56,14 @@ async fn main() -> Result<()> {
     }
 
     let presets = if args.preset.is_empty() {
-        tracing::debug!("No preset specified, using the default preset.");
+        tracing::warn!("No preset specified, using the default preset.");
         vec![String::from("default")]
     } else {
         args.preset
-    };
-
-    let presets = presets
-        .iter()
-        .map(|name| config.select_preset(name))
-        .collect::<Result<Vec<_>>>()?;
+    }
+    .iter()
+    .map(|name| config.select_preset(name))
+    .collect::<Result<Vec<_>>>()?;
 
     match daktilo::run(presets, args.device).await {
         Ok(_) => process::exit(0),
