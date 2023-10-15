@@ -181,15 +181,15 @@ daktilo [OPTIONS]
 **Options**:
 
 ```sh
--v, --verbose          Enables verbose logging [env: VERBOSE=]
--p, --preset <PRESET>  Sets the name of the sound preset to use [env: PRESET=]
--l, --list-presets     Lists the available presets
-    --list-devices     Lists the available output devices
--d, --device <DEVICE>  Sets the device for playback [env: DAKTILO_DEVICE=]
--c, --config <PATH>    Sets the configuration file [env: DAKTILO_CONFIG=]
--i, --init             Writes the default configuration file
--h, --help             Print help
--V, --version          Print version
+-v, --verbose               Enables verbose logging [env: VERBOSE=]
+-p, --preset [<PRESET>...]  Sets the name of the sound preset to use [env: PRESET=]
+-l, --list-presets          Lists the available presets
+    --list-devices          Lists the available output devices
+-d, --device <DEVICE>       Sets the device for playback [env: DAKTILO_DEVICE=]
+-c, --config <PATH>         Sets the configuration file [env: DAKTILO_CONFIG=]
+-i, --init                  Writes the default configuration file
+-h, --help                  Print help (see more with '--help')
+-V, --version               Print version
 ```
 
 ## Configuration
