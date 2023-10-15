@@ -78,6 +78,13 @@ To use a preset:
 daktilo --preset musicbox
 ```
 
+You can also use multiple presets at the same time:
+
+```sh
+# orchestra
+daktilo -p default -p musicbox -p drumkit
+```
+
 To use a different output device:
 
 ```sh
