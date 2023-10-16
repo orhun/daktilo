@@ -64,26 +64,41 @@ pub struct Args {
 /// Variate pitch/volume/tempo.
 #[derive(clap::Args, Default, Debug)]
 pub struct SoundVariationArgs {
-    /// Variate pitch +/- in percent.
-    /// Overrides preset configuration.
-    #[arg(long, env = "DAKTILO_PITCH", value_name = "PERCENT")]
-    pub variate_pitch: Option<f32>,
     /// Variate volume +/- in percent.
-    /// Overrides preset configuration.
-    #[arg(long, env = "DAKTILO_VOLUME", value_name = "PERCENT")]
-    pub variate_volume: Option<f32>,
+    #[arg(
+        long,
+        env = "DAKTILO_VOLUME",
+        value_name = "PERCENT_UP[,PERCENT_DOWN]",
+        value_delimiter = ',',
+        num_args(1..2)
+    )]
+    pub variate_volume: Option<Vec<f32>>,
     /// Variate tempo +/- in percent.
-    /// Overrides preset configuration.
-    #[arg(long, env = "DAKTILO_TEMPO", value_name = "PERCENT")]
-    pub variate_tempo: Option<f32>,
+    #[arg(
+        long,
+        env = "DAKTILO_TEMPO",
+        value_name = "PERCENT_UP[,PERCENT_DOWN]",
+        value_delimiter = ',',
+        num_args(1..2)
+    )]
+    pub variate_tempo: Option<Vec<f32>>,
 }
 
-impl Into<SoundVariation> for SoundVariationArgs {
-    fn into(self) -> SoundVariation {
-        SoundVariation {
-            pitch: self.variate_pitch.map(|pitch| (pitch, pitch)),
-            volume: self.variate_volume.map(|volume| (volume, volume)),
-            tempo: self.variate_tempo.map(|tempo| (tempo, tempo)),
+impl From<SoundVariationArgs> for SoundVariation {
+    fn from(args: SoundVariationArgs) -> Self {
+        Self {
+            volume: args.variate_volume.map(|v| {
+                (
+                    v.first().cloned().unwrap_or(1.0),
+                    v.get(1).or(v.first()).cloned().unwrap_or(1.0),
+                )
+            }),
+            tempo: args.variate_tempo.map(|t| {
+                (
+                    t.first().cloned().unwrap_or(1.0),
+                    t.get(1).or(t.first()).cloned().unwrap_or(1.0),
+                )
+            }),
         }
     }
 }

@@ -83,8 +83,8 @@ impl Config {
                         }],
                         strategy: None,
                         variation: Some(SoundVariation {
-                            pitch: Some((0.5, 0.5)),
-                            ..Default::default()
+                            volume: Some((0.1, 0.1)),
+                            tempo: Some((0.075, 0.075)),
                         }),
                     },
                 ],
@@ -202,8 +202,6 @@ pub enum PlaybackStrategy {
 pub struct SoundVariation {
     /// Volume +/- in percent.
     pub volume: Option<(f32, f32)>,
-    /// Pitch +/- in percent.
-    pub pitch: Option<(f32, f32)>,
     /// Tempo +/- in percent.
     pub tempo: Option<(f32, f32)>,
 }

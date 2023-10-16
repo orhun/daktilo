@@ -181,15 +181,17 @@ daktilo [OPTIONS]
 **Options**:
 
 ```sh
--v, --verbose               Enables verbose logging [env: VERBOSE=]
--p, --preset [<PRESET>...]  Sets the name of the sound preset to use [env: PRESET=]
--l, --list-presets          Lists the available presets
-    --list-devices          Lists the available output devices
--d, --device <DEVICE>       Sets the device for playback [env: DAKTILO_DEVICE=]
--c, --config <PATH>         Sets the configuration file [env: DAKTILO_CONFIG=]
--i, --init                  Writes the default configuration file
--h, --help                  Print help (see more with '--help')
--V, --version               Print version
+-v, --verbose                                    Enables verbose logging [env: VERBOSE=]
+-p, --preset [<PRESET>...]                       Sets the name of the sound preset to use [env: PRESET=]
+-l, --list-presets                               Lists the available presets
+    --list-devices                               Lists the available output devices
+-d, --device <DEVICE>                            Sets the device for playback [env: DAKTILO_DEVICE=]
+-c, --config <PATH>                              Sets the configuration file [env: DAKTILO_CONFIG=]
+-i, --init                                       Writes the default configuration file
+    --variate-volume <PERCENT_UP[,PERCENT_DOWN]> Variate volume +/- in percent [env: DAKTILO_VOLUME=]
+    --variate-tempo <PERCENT_UP[,PERCENT_DOWN]>  Variate tempo +/- in percent [env: DAKTILO_TEMPO=]
+-h, --help                                       Print help (see more with '--help')
+-V, --version                                    Print version
 ```
 
 ## Configuration
@@ -235,6 +237,7 @@ key_config = []
 name = "another_custom"
 key_config = []
 disabled_keys = []
+variation = { volume: [0.1, 0.1], tempo: [0.05, 0.05] }
 ```
 
 As shown above, `sound_preset` consists of 2 entries:
@@ -242,6 +245,7 @@ As shown above, `sound_preset` consists of 2 entries:
 - `name`: The name of the preset. It will be used in conjunction with `--preset` flag. e.g. `--preset custom`
 - `key_config`: An array of key press/release events for assigning audio files to the specified keys. It can also be used to control the volume etc.
 - `disabled_keys`: An array of keys that will not be used for playback.
+- `variation`: Variate the sound on each event for `KeyConfig`'s that do not specify variations[*](#sound-variation)
 
 <details>
   <summary>Click for the <a href="https://docs.rs/rdev/latest/rdev/enum.Key.html">list of available keys</a>.</summary>
@@ -263,6 +267,7 @@ key_config = [
 - `files`: An array of files.
   - `path`: The absolute path of the file. If the file is embedded in the binary (i.e. if it is inside `sounds/` directory) then it is the name of the file without full path.
   - `volume`: The volume of the sound. The value 1.0 is the "normal" volume (unfiltered input). Any value other than 1.0 will multiply each sample by this value.
+- `variation`: Variate the sound on each `event`[*](#sound-variation)
 
 If you have defined multiple files for a key event, you can also specify a strategy for how to play them:
 
@@ -308,12 +313,23 @@ key_config = [
     { path = "cat.mp3" },
     { path = "dog.mp3" },
     { path = "bird.mp3" },
-  ], strategy = "random" },
+  ], strategy = "random", variation = { volume: [0.1, 0.1], tempo: [0.05, 0.05] } },
 ]
 
 # Disabled keys that won't trigger any sound events
 disabled_keys = ["CapsLock", "NumLock"]
 ```
+### Sound Variation
+
+To make the keyboard sounds more varied it is possible to variate both volume and playback speed (the later also varies the pitch).
+
+Values are in percent, where the first value determines the maximum increase and the second the maximum decrease. The actual value is determined randomly on each keypress.
+
+- If cli or environment variables are set configurations made in the presets are overridden.
+  - Values need to be separated by a `,`
+  - If only one value is supplied it is used for both increase and decrease
+- If a `KeyConfig` is set the preset values are overridden.
+- The configuration on a preset applies to all `KeyConfig`'s that do not have any values set.
 
 ## Similar Projects
 
