@@ -28,7 +28,7 @@ use std::thread;
 
 /// Starts the typewriter.
 pub async fn run(
-    sound_preset: SoundPreset,
+    sound_presets: Vec<SoundPreset>,
     variation: Option<SoundVariation>,
     device: Option<String>,
 ) -> Result<()> {
@@ -44,13 +44,18 @@ pub async fn run(
     });
 
     // Create the application state.
-    tracing::debug!("{:#?}", sound_preset);
-    let mut app = App::init(sound_preset, variation, device)?;
+    tracing::debug!("{:#?}", sound_presets);
+    let mut apps = sound_presets
+        .into_iter()
+        .map(|sound_preset| App::init(sound_preset, variation.clone(), device.clone()))
+        .collect::<Result<Vec<_>>>()?;
 
     // Handle events.
     loop {
         if let Some(event) = receiver.recv().await {
-            app.handle_key_event(event)?;
+            for app in apps.iter_mut() {
+                app.handle_key_event(event.clone()).unwrap();
+            }
         }
     }
 }

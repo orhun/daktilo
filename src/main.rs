@@ -54,10 +54,19 @@ async fn main() -> Result<()> {
             })?;
         return Ok(());
     }
-    let preset_name = args.preset.unwrap_or_else(|| String::from("default"));
-    let preset = config.select_preset(&preset_name)?;
+
+    let presets = if args.preset.is_empty() {
+        tracing::warn!("No preset specified, using the default preset.");
+        vec![String::from("default")]
+    } else {
+        args.preset
+    }
+    .iter()
+    .map(|name| config.select_preset(name))
+    .collect::<Result<Vec<_>>>()?;
+
     match daktilo::run(
-        preset,
+        presets,
         args.sound_variation_args.map(|v| v.into()),
         args.device,
     )

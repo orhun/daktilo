@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2023-10-15
+
+### 📇 Features
+
+- *(playback)* Allow specifying multiple presets at once ([#43](https://github.com/orhun/daktilo/pull/43)) - ([4154b8c](https://github.com/orhun/daktilo/commit/4154b8c3dc69a0b210e29dbef64a3ddc3fcd4339))
+
 ## [0.3.1] - 2023-10-10
 
 ### 📚 Documentation
