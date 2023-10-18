@@ -82,8 +82,6 @@ cargo-dist-version = "0.3.1"
 ci = ["github"]
 # The installers to generate for each app
 installers = ["shell", "powershell", "msi"]
-# A GitHub repo to push Homebrew formulas to
-tap = "orhun/daktilo"
 # Target platforms to build apps for (Rust target-triple syntax)
 targets = [
   "x86_64-unknown-linux-gnu",
@@ -91,8 +89,6 @@ targets = [
   "x86_64-apple-darwin",
   "x86_64-pc-windows-msvc",
 ]
-# Publish jobs to run in CI
-publish-jobs = ["homebrew"]
 # Publish jobs to run in CI
 pr-run-mode = "upload"
 # Ignore out-of-date contents
