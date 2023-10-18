@@ -100,6 +100,17 @@ To variate the sounds and have a more realistic typewriter experience:
 daktilo --variate-tempo 0.9,0.4 --variate-volume 0.1,0.5
 ```
 
+<details>
+  <summary>Spoiler warning</summary>
+
+There are easter eggs. If that is something you do not like you can disable them either via the config file option `no_surprises = true` or using the command-line flag:
+
+```sh
+daktilo --no-surprises
+```
+
+</details>
+
 ## Supported Platforms
 
 - [x] Linux

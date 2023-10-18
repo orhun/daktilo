@@ -27,13 +27,19 @@ async fn main() -> Result<()> {
         return Ok(());
     }
     let config_path = args.config.or(Config::get_default_location());
-    let config = if config_path.as_ref().is_some_and(|v| v.exists()) {
+    let mut config = if config_path.as_ref().is_some_and(|v| v.exists()) {
         // unwrap is checked above.
         Config::parse(&config_path.unwrap())?
     } else {
         tracing::warn!("Using the default configuration (run with `--init` to save it to a file).");
         EmbeddedConfig::parse()?
     };
+
+    if args.no_surprises {
+        tracing::debug!("I bet you're fun at parties.");
+        config.disable_easter_eggs = true;
+    }
+
     tracing::debug!("{:#?}", config);
 
     // Start the typewriter.
