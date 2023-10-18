@@ -41,6 +41,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
 - [Usage](#usage)
 - [Configuration](#configuration)
   - [Adding custom presets](#adding-custom-presets)
+  - [Sound Variation](#sound-variation)
 - [Similar Projects](#similar-projects)
 - [Acknowledgements](#acknowledgements)
 - [Donations](#donations)
@@ -92,6 +93,12 @@ daktilo --device pipewire
 ```
 
 Also, you can use `--list-devices` to list the available output devices.
+
+To variate the sounds and have a more realistic typewriter experience:
+
+```sh
+daktilo --variate-tempo 0.9,0.4 --variate-volume 0.1,0.5
+```
 
 ## Supported Platforms
 
@@ -245,7 +252,7 @@ As shown above, `sound_preset` consists of 2 entries:
 - `name`: The name of the preset. It will be used in conjunction with `--preset` flag. e.g. `--preset custom`
 - `key_config`: An array of key press/release events for assigning audio files to the specified keys. It can also be used to control the volume etc.
 - `disabled_keys`: An array of keys that will not be used for playback.
-- `variation`: Variate the sound on each event for `KeyConfig`'s that do not specify variations[*](#sound-variation)
+- `variation`: Variate the sound on each event for `KeyConfig`'s that do not specify variations[\*](#sound-variation)
 
 <details>
   <summary>Click for the <a href="https://docs.rs/rdev/latest/rdev/enum.Key.html">list of available keys</a>.</summary>
@@ -267,7 +274,7 @@ key_config = [
 - `files`: An array of files.
   - `path`: The absolute path of the file. If the file is embedded in the binary (i.e. if it is inside `sounds/` directory) then it is the name of the file without full path.
   - `volume`: The volume of the sound. The value 1.0 is the "normal" volume (unfiltered input). Any value other than 1.0 will multiply each sample by this value.
-- `variation`: Variate the sound on each `event`[*](#sound-variation)
+- `variation`: Variate the sound on each `event`[\*](#sound-variation)
 
 If you have defined multiple files for a key event, you can also specify a strategy for how to play them:
 
@@ -319,14 +326,15 @@ key_config = [
 # Disabled keys that won't trigger any sound events
 disabled_keys = ["CapsLock", "NumLock"]
 ```
+
 ### Sound Variation
 
 To make the keyboard sounds more varied it is possible to variate both volume and playback speed (the later also varies the pitch).
 
 Values are in percent, where the first value determines the maximum increase and the second the maximum decrease. The actual value is determined randomly on each keypress.
 
-- If cli or environment variables are set configurations made in the presets are overridden.
-  - Values need to be separated by a `,`
+- If command line arguments or environment variables are set configurations made in the presets are overridden.
+  - Values need to be separated by a ",".
   - If only one value is supplied it is used for both increase and decrease
 - If a `KeyConfig` is set the preset values are overridden.
 - The configuration on a preset applies to all `KeyConfig`'s that do not have any values set.
