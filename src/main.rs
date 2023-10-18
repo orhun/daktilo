@@ -71,7 +71,13 @@ async fn main() -> Result<()> {
     .map(|name| config.select_preset(name))
     .collect::<Result<Vec<_>>>()?;
 
-    match daktilo::run(presets, args.device).await {
+    match daktilo::run(
+        presets,
+        args.sound_variation_args.map(|v| v.into()),
+        args.device,
+    )
+    .await
+    {
         Ok(_) => process::exit(0),
         Err(e) => {
             tracing::error!("error occurred: {e}");

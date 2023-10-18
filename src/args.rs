@@ -2,6 +2,8 @@ use std::path::PathBuf;
 
 use clap::Parser;
 
+use crate::config::SoundVariation;
+
 /// Typewriter ASCII banner.
 pub const BANNER: &str = r#"
       .-------.
@@ -57,6 +59,51 @@ pub struct Args {
     /// Disables the easter eggs.
     #[arg(long, hide = true)]
     pub no_surprises: bool,
+    /// Variate pitch/volume/tempo.
+    #[command(flatten)]
+    pub sound_variation_args: Option<SoundVariationArgs>,
+}
+
+/// Variate pitch/volume/tempo.
+#[derive(clap::Args, Default, Debug)]
+pub struct SoundVariationArgs {
+    /// Variate volume +/- in percent.
+    #[arg(
+        long,
+        env = "DAKTILO_VOLUME",
+        value_name = "PERCENT_UP[,PERCENT_DOWN]",
+        value_delimiter = ',',
+        num_args(1..2)
+    )]
+    pub variate_volume: Option<Vec<f32>>,
+    /// Variate tempo +/- in percent.
+    #[arg(
+        long,
+        env = "DAKTILO_TEMPO",
+        value_name = "PERCENT_UP[,PERCENT_DOWN]",
+        value_delimiter = ',',
+        num_args(1..2)
+    )]
+    pub variate_tempo: Option<Vec<f32>>,
+}
+
+impl From<SoundVariationArgs> for SoundVariation {
+    fn from(args: SoundVariationArgs) -> Self {
+        Self {
+            volume: args.variate_volume.map(|v| {
+                (
+                    v.first().cloned().unwrap_or(1.0),
+                    v.get(1).or(v.first()).cloned().unwrap_or(1.0),
+                )
+            }),
+            tempo: args.variate_tempo.map(|t| {
+                (
+                    t.first().cloned().unwrap_or(1.0),
+                    t.get(1).or(t.first()).cloned().unwrap_or(1.0),
+                )
+            }),
+        }
+    }
 }
 
 #[cfg(test)]

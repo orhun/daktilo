@@ -17,10 +17,10 @@ key_config = [
   { event = "press", keys = "Return", files = [
     { path = "ding.mp3", volume = 1.0 },
   ] },
-  { event = "press", keys = ".*", files = [
+  { event = "press", keys = ".*", variation = { volume = [0.1, 0.1], tempo = [0.05, 0.05] }, files = [
     { path = "keydown.mp3", volume = 1.0 },
   ] },
-  { event = "release", keys = ".*", files = [
+  { event = "release", keys = ".*", variation = { volume = [0.1, 0.1], tempo = [0.05, 0.05] }, files = [
     { path = "keyup.mp3", volume = 1.0 },
   ] },
 ]
