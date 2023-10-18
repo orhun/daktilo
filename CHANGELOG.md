@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2023-10-18
+
+### 📇 Features
+
+- *(config)* Add option to disable easter eggs ([#48](https://github.com/orhun/daktilo/pull/48)) - ([7d347ad](https://github.com/orhun/daktilo/commit/7d347ad21e0ca50699e2c53e2f0a48495211a14d))
+- *(playback)* Add random variation on each keypress ([#24](https://github.com/orhun/daktilo/pull/24)) - ([c53334c](https://github.com/orhun/daktilo/commit/c53334c2f987b2e2a779345de037e80df1a5f9d2))
+
+### 📚 Documentation
+
+- *(readme)* Update the usage options - ([e153eb4](https://github.com/orhun/daktilo/commit/e153eb4ecfdcfa618c51719da85fee630fdf1d32))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Remove homebrew release config - ([666cf57](https://github.com/orhun/daktilo/commit/666cf57693e317fde874b5ee593d22ebf39c7fc2))
+
 ## [0.4.0] - 2023-10-15
 
 ### 📇 Features
