@@ -252,7 +252,7 @@ As shown above, `sound_preset` consists of 2 entries:
 - `name`: The name of the preset. It will be used in conjunction with `--preset` flag. e.g. `--preset custom`
 - `key_config`: An array of key press/release events for assigning audio files to the specified keys. It can also be used to control the volume etc.
 - `disabled_keys`: An array of keys that will not be used for playback.
-- `variation`: Variate the sound on each event for `KeyConfig`'s that do not specify variations[\*](#sound-variation)
+- `variation`: Variate the sound on each event for `key_config`s that do not specify variations[\*](#sound-variation)
 
 <details>
   <summary>Click for the <a href="https://docs.rs/rdev/latest/rdev/enum.Key.html">list of available keys</a>.</summary>
@@ -336,8 +336,8 @@ Values are in percent, where the first value determines the maximum increase and
 - If command line arguments or environment variables are set configurations made in the presets are overridden.
   - Values need to be separated by a ",".
   - If only one value is supplied it is used for both increase and decrease
-- If a `KeyConfig` is set the preset values are overridden.
-- The configuration on a preset applies to all `KeyConfig`'s that do not have any values set.
+- If a `key_config` is set the preset values are overridden.
+- The configuration on a preset applies to all `key_config`'s that do not have any values set.
 
 ## Similar Projects
 
