@@ -93,6 +93,17 @@ daktilo --device pipewire
 
 Also, you can use `--list-devices` to list the available output devices.
 
+<details>
+  <summary>Spoiler warning</summary>
+
+There are easter eggs. If that is something you do not like you can disable them either via the config file option `no_surprises = true` or using the command-line flag:
+
+```sh
+daktilo --no-surprises
+```
+
+</details>
+
 ## Supported Platforms
 
 - [x] Linux
