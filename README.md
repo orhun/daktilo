@@ -121,12 +121,7 @@ daktilo --no-surprises
 
 ## Installation
 
-<details>
-  <summary>Packaging status</summary>
-
 [![Packaging status](https://repology.org/badge/vertical-allrepos/daktilo.svg)](https://repology.org/project/daktilo/versions)
-
-</details>
 
 ### Cargo
 
