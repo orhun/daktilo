@@ -26,7 +26,7 @@ path = "src/bin/mangen.rs"
 
 [dependencies]
 rdev = { version = "0.5.3", features = ["serialize"] }
-rodio = { version = "0.17.2", default-features = false, features = [
+rodio = { version = "0.17.3", default-features = false, features = [
   "symphonia-mp3",
 ] }
 rust-embed = { version = "8.0.0", features = ["debug-embed", "compression"] }
