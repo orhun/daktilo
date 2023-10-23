@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.1] - 2023-10-23
+
+### 🎨 Styling
+
+- *(readme)* Show the repology badge - ([62cff25](https://github.com/orhun/daktilo/commit/62cff256ab3745253e5ef72911f1f28b227df25b))
+
 ## [0.5.0] - 2023-10-18
 
 ### 📇 Features
