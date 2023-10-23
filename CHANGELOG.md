@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+<<<<<<< Updated upstream
 ## [0.5.1] - 2023-10-19
+=======
+## [0.5.1] - 2023-10-23
+>>>>>>> Stashed changes
 
 ### 🎨 Styling
 
