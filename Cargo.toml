@@ -41,7 +41,7 @@ toml = "0.8.4"
 regex = "1.10.2"
 serde_regex = "1.1.0"
 colored = "2.0.4"
-clap_complete = "4.4.3"
+clap_complete = "4.4.4"
 clap_mangen = "0.2.15"
 fastrand = "2.0.1"
 
