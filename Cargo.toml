@@ -35,7 +35,7 @@ tokio = { version = "1.33.0", features = ["full"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 clap = { version = "4.4.7", features = ["derive", "env", "wrap_help", "cargo"] }
-serde = { version = "1.0.189", features = ["derive"] }
+serde = { version = "1.0.190", features = ["derive"] }
 dirs = "5.0.1"
 toml = "0.8.4"
 regex = "1.10.2"
