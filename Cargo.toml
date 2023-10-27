@@ -1,5 +1,8 @@
-[package]
-name = "daktilo"
+[workspace]
+members = ["crates/*"]
+resolver = "2"
+
+[workspace.package]
 version = "0.5.0"
 description = "Turn your keyboard into a typewriter! 📇"
 authors = ["Orhun Parmaksız <orhunparmaksiz@gmail.com>"]
@@ -9,43 +12,16 @@ homepage = "https://github.com/orhun/daktilo"
 repository = "https://github.com/orhun/daktilo"
 keywords = ["typewriter", "keyboard", "nostalgic", "type"]
 categories = ["command-line-utilities", "multimedia"]
-default-run = "daktilo"
 rust-version = "1.70.0"
 edition = "2021"
 
-[features]
-audio-tests = []
-
-[[bin]]
-name = "daktilo-completions"
-path = "src/bin/completions.rs"
-
-[[bin]]
-name = "daktilo-mangen"
-path = "src/bin/mangen.rs"
-
-[dependencies]
-rdev = { version = "0.5.3", features = ["serialize"] }
-rodio = { version = "0.17.3", default-features = false, features = [
-  "symphonia-mp3",
-] }
-rust-embed = { version = "8.0.0", features = ["debug-embed", "compression"] }
+[workspace.dependencies]
 thiserror = "1.0.50"
-tokio = { version = "1.33.0", features = ["full"] }
+serde = { version = "1.0.190", features = ["derive"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
-clap = { version = "4.4.7", features = ["derive", "env", "wrap_help", "cargo"] }
-serde = { version = "1.0.190", features = ["derive"] }
-dirs = "5.0.1"
-toml = "0.8.5"
-regex = "1.10.2"
-serde_regex = "1.1.0"
+tokio = { version = "1.33.0", features = ["full"] }
 colored = "2.0.4"
-clap_complete = "4.4.4"
-clap_mangen = "0.2.15"
-fastrand = "2.0.1"
-
-[dev-dependencies]
 pretty_assertions = "1.4.0"
 
 [profile.dev]
@@ -93,13 +69,3 @@ targets = [
 pr-run-mode = "upload"
 # Skip checking whether the specified configuration files are up to date
 allow-dirty = ["ci", "msi"]
-
-[workspace.metadata.dist.dependencies.apt]
-libasound2-dev = '*'
-libxi-dev = '*'
-libxtst-dev = '*'
-pkg-config = '*'
-
-[package.metadata.wix]
-upgrade-guid = "51610A8E-55C9-4F49-8C9F-3529499D5C60"
-path-guid = "2198A7FB-5F3C-4FAB-B253-2314115AD2DD"

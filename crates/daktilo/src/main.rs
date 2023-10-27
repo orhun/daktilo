@@ -1,15 +1,12 @@
 use clap::Parser;
-use colored::*;
-use rodio::cpal::traits::HostTrait;
-use rodio::DeviceTrait;
+use colored::Colorize;
+use daktilo::args::Args;
+use daktilo_lib::config::{Config, DEFAULT_CONFIG};
+use daktilo_lib::embed::EmbeddedConfig;
+use daktilo_lib::error::Result;
+use daktilo_lib::logger;
 use std::{fs, process};
 use tracing::Level;
-
-use daktilo::args::Args;
-use daktilo::config::{Config, DEFAULT_CONFIG};
-use daktilo::embed::EmbeddedConfig;
-use daktilo::error::Result;
-use daktilo::logger;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -52,10 +49,10 @@ async fn main() -> Result<()> {
         return Ok(());
     } else if args.list_devices {
         tracing::info!("Available devices:");
-        rodio::cpal::default_host()
-            .output_devices()?
+        daktilo_lib::audio::get_devices()?
+            .iter()
             .try_for_each::<_, Result<()>>(|v| {
-                println!("• {}", v.name()?.white().bold());
+                println!("• {}", v.0.white().bold());
                 Ok(())
             })?;
         return Ok(());
@@ -71,7 +68,7 @@ async fn main() -> Result<()> {
     .map(|name| config.select_preset(name))
     .collect::<Result<Vec<_>>>()?;
 
-    match daktilo::run(
+    match daktilo_lib::run(
         presets,
         args.sound_variation_args.map(|v| v.into()),
         args.device,

@@ -10,7 +10,7 @@ use std::path::{Path, PathBuf};
 use std::str;
 
 /// Default configuration file.
-pub const DEFAULT_CONFIG: &str = concat!(env!("CARGO_PKG_NAME"), ".toml");
+pub const DEFAULT_CONFIG: &str = "daktilo.toml";
 
 /// Configuration.
 #[derive(Debug, Serialize, Deserialize)]
@@ -217,8 +217,9 @@ mod tests {
     #[test]
     fn test_parse_config() -> Result<()> {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../")
             .join("config")
-            .join(format!("{}.toml", env!("CARGO_PKG_NAME")));
+            .join("daktilo.toml");
         if let Some(global_path) = Config::get_default_location() {
             path = global_path;
         }

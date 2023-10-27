@@ -8,7 +8,7 @@ use std::str;
 
 /// Embedded sound assets.
 #[derive(RustEmbed)]
-#[folder = "sounds"]
+#[folder = "../../sounds"]
 pub struct EmbeddedSound;
 
 impl EmbeddedSound {
@@ -22,7 +22,7 @@ impl EmbeddedSound {
 ///
 /// Embeds `config/`[`DEFAULT_CONFIG`] into the binary.
 #[derive(Debug, RustEmbed)]
-#[folder = "config/"]
+#[folder = "../../config/"]
 pub struct EmbeddedConfig;
 
 impl EmbeddedConfig {
@@ -30,7 +30,10 @@ impl EmbeddedConfig {
     pub fn get_config() -> Result<String> {
         match Self::get(DEFAULT_CONFIG) {
             Some(v) => Ok(str::from_utf8(&v.data)?.to_string()),
-            None => Err(Error::Embedded(String::from("embedded config not found"))),
+            None => Err(Error::Embedded(format!(
+                "embedded config {} not found",
+                DEFAULT_CONFIG,
+            ))),
         }
     }
 

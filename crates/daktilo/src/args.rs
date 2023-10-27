@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::Parser;
 
-use crate::config::SoundVariation;
+use daktilo_lib::config::SoundVariation;
 
 /// Typewriter ASCII banner.
 pub const BANNER: &str = r#"
