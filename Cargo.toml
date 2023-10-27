@@ -77,7 +77,7 @@ lto = "thin"
 # Config for 'cargo dist'
 [workspace.metadata.dist]
 # The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
-cargo-dist-version = "0.3.1"
+cargo-dist-version = "0.4.0"
 # CI backends to support
 ci = ["github"]
 # The installers to generate for each app
@@ -91,8 +91,14 @@ targets = [
 ]
 # Publish jobs to run in CI
 pr-run-mode = "upload"
-# Ignore out-of-date contents
+# Skip checking whether the specified configuration files are up to date
 allow-dirty = ["ci", "msi"]
+
+[workspace.metadata.dist.dependencies.apt]
+libasound2-dev = '*'
+libxi-dev = '*'
+libxtst-dev = '*'
+pkg-config = '*'
 
 [package.metadata.wix]
 upgrade-guid = "51610A8E-55C9-4F49-8C9F-3529499D5C60"
