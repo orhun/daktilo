@@ -186,4 +186,6 @@ jobs:
             wget -qi -
           tar -xvf cargo-msrv*.tar* -C  ~/.cargo/bin/ cargo-msrv
           printf "%s" "Checking MSRV..."
-          cargo msrv --output-format json verify | tail -n 1 | jq --exit-status '.success'
+          # Workaround for https://github.com/foresterre/cargo-msrv/issues/590
+          cargo msrv --output-format json --path crates/daktilo verify | tail -n 1 | jq --exit-status '.success'
+          cargo msrv --output-format json --path crates/daktilo_lib verify | tail -n 1 | jq --exit-status '.success'

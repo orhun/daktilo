@@ -34,3 +34,6 @@ colored.workspace = true
 [dev-dependencies]
 pretty_assertions.workspace = true
 
+# Workaround for https://github.com/foresterre/cargo-msrv/issues/590
+[package.metadata]
+msrv = "1.70.0"
