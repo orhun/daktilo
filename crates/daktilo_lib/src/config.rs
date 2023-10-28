@@ -219,7 +219,7 @@ mod tests {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
             .join("../../")
             .join("config")
-            .join("daktilo.toml");
+            .join(DEFAULT_CONFIG);
         if let Some(global_path) = Config::get_default_location() {
             path = global_path;
         }

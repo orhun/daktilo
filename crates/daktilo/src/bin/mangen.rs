@@ -32,11 +32,18 @@ fn main() -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
     #[test]
     fn generate_manpage() -> Result<()> {
-        if env::var(OUT_DIR_ENV).is_ok() {
-            main()?;
+        let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../");
+        if let Ok(out_dir) = env::var(OUT_DIR_ENV) {
+            path = path.join(out_dir);
+        } else {
+            path = path.join("target");
         }
+
+        env::set_var(OUT_DIR_ENV, path);
+        main()?;
         Ok(())
     }
 }
