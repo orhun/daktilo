@@ -20,7 +20,7 @@ thiserror = "1.0.50"
 serde = { version = "1.0.190", features = ["derive"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
-tokio = { version = "1.33.0", features = ["full"] }
+tokio = { version = "1.33.0", features = ["macros", "rt-multi-thread", "sync"] }
 colored = "2.0.4"
 pretty_assertions = "1.4.0"
 
