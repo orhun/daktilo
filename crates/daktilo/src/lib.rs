@@ -2,7 +2,7 @@
 
 #![warn(missing_docs)]
 
-/// Cli argument parsing.
+/// CLI argument parser.
 ///
 /// Needs to be in a lib for completions and mangen.
 pub mod args;

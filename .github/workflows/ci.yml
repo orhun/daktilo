@@ -185,7 +185,10 @@ jobs:
             select(.name | ascii_downcase | test(\"linux.*x86_64|x86_64.*linux\")).browser_download_url" | \
             wget -qi -
           tar -xvf cargo-msrv*.tar* -C  ~/.cargo/bin/ cargo-msrv
-          printf "%s" "Checking MSRV..."
           # Workaround for https://github.com/foresterre/cargo-msrv/issues/590
-          cargo msrv --output-format json --path crates/daktilo verify | tail -n 1 | jq --exit-status '.success'
-          cargo msrv --output-format json --path crates/daktilo_lib verify | tail -n 1 | jq --exit-status '.success'
+          for package in $(cargo metadata --format-version 1 --no-deps | jq -r ".workspace_members[]" | awk '{print $1}'); do
+            version=$(cargo metadata --format-version 1 --no-deps | jq -r '.packages[] | select(.name | test("^daktilo$")) | .rust_version')
+            printf "Checking MSRV $version for $package..."
+            echo -e "[package.metadata]\nmsrv = \"${version}\"" >> "crates/${package}/Cargo.toml"
+            cargo msrv --output-format json --path "crates/${package}" verify | tail -n 1 | jq --exit-status '.success'
+          done
