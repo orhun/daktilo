@@ -14,7 +14,14 @@ async fn main() -> Result<()> {
     let args = Args::parse();
 
     // Initialize the logger.
-    logger::init(args.verbose.then_some(Level::DEBUG))?;
+    logger::init(
+        Some(match args.verbose {
+            0 => Level::INFO,
+            1 => Level::DEBUG,
+            _ => Level::TRACE,
+        }),
+        vec![env!("CARGO_PKG_NAME").to_string()],
+    )?;
     tracing::info!("Starting...");
 
     // Parse the config file.
