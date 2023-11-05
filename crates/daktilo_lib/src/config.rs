@@ -1,16 +1,14 @@
 use crate::error::{Error, Result};
-use colored::*;
 use rdev::Key;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use std::env;
-use std::fmt;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::str;
 
 /// Default configuration file.
-pub const DEFAULT_CONFIG: &str = concat!(env!("CARGO_PKG_NAME"), ".toml");
+pub const DEFAULT_CONFIG: &str = "daktilo.toml";
 
 /// Configuration.
 #[derive(Debug, Serialize, Deserialize)]
@@ -116,42 +114,6 @@ pub struct SoundPreset {
     pub variation: Option<SoundVariation>,
 }
 
-impl fmt::Display for SoundPreset {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        writeln!(f, "[{}]", self.name.white().bold())?;
-        let mut table = format!(
-            " {:<20}  {:<20}  {:<20}\n",
-            "Event".bold(),
-            "Keys".bold(),
-            "File".bold()
-        );
-        table.push_str(&format!(
-            " {:<20}  {:<20}  {:<20}\n",
-            "-----", "----", "----"
-        ));
-        for key_config in &self.key_config {
-            let event_str = match key_config.event {
-                KeyEvent::KeyPress => "Key Press",
-                KeyEvent::KeyRelease => "Key Release",
-            };
-            let keys_str = key_config.keys.as_str();
-            let file_str = &key_config
-                .files
-                .iter()
-                .map(|v| v.path.clone())
-                .collect::<Vec<String>>()
-                .join(",");
-            table.push_str(&format!(
-                " {:<20}  {:<20}  {:<20}\n",
-                event_str,
-                keys_str,
-                file_str.italic()
-            ));
-        }
-        write!(f, "{}", table)
-    }
-}
-
 /// Key configuration.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct KeyConfig {
@@ -217,8 +179,9 @@ mod tests {
     #[test]
     fn test_parse_config() -> Result<()> {
         let mut path = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../")
             .join("config")
-            .join(format!("{}.toml", env!("CARGO_PKG_NAME")));
+            .join(DEFAULT_CONFIG);
         if let Some(global_path) = Config::get_default_location() {
             path = global_path;
         }

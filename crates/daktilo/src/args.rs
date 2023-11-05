@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use clap::Parser;
 
-use crate::config::SoundVariation;
+use daktilo_lib::config::SoundVariation;
 
 /// Typewriter ASCII banner.
 pub const BANNER: &str = r#"
@@ -34,8 +34,8 @@ pub const BANNER: &str = r#"
 )]
 pub struct Args {
     /// Enables verbose logging.
-    #[arg(short, long, env)]
-    pub verbose: bool,
+    #[arg(short, long, action = clap::ArgAction::Count)]
+    pub verbose: u8,
     /// Sets the name of the sound preset to use.
     ///
     /// Can be specified multiple times to play multiple presets at once.

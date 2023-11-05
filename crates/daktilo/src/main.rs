@@ -1,23 +1,66 @@
 use clap::Parser;
-use colored::*;
-use rodio::cpal::traits::HostTrait;
-use rodio::DeviceTrait;
+use colored::Colorize;
+use daktilo::args::Args;
+use daktilo_lib::config::{Config, KeyEvent, SoundPreset, DEFAULT_CONFIG};
+use daktilo_lib::embed::EmbeddedConfig;
+use daktilo_lib::error::Result;
+use daktilo_lib::logger;
 use std::{fs, process};
 use tracing::Level;
 
-use daktilo::args::Args;
-use daktilo::config::{Config, DEFAULT_CONFIG};
-use daktilo::embed::EmbeddedConfig;
-use daktilo::error::Result;
-use daktilo::logger;
+/// Prints the available presets to stdout as a table.
+fn list_presets(presets: Vec<SoundPreset>) {
+    tracing::info!("Available presets:");
+    presets.iter().for_each(|preset| {
+        println!("[{}]", preset.name.white().bold());
+        let mut table = format!(
+            " {:<20}  {:<20}  {:<20}\n",
+            "Event".bold(),
+            "Keys".bold(),
+            "File".bold()
+        );
+        table.push_str(&format!(
+            " {:<20}  {:<20}  {:<20}\n",
+            "-----", "----", "----"
+        ));
+        for key_config in &preset.key_config {
+            let event_str = match key_config.event {
+                KeyEvent::KeyPress => "Key Press",
+                KeyEvent::KeyRelease => "Key Release",
+            };
+            let keys_str = key_config.keys.as_str();
+            let file_str = &key_config
+                .files
+                .iter()
+                .map(|v| v.path.clone())
+                .collect::<Vec<String>>()
+                .join(",");
+            table.push_str(&format!(
+                " {:<20}  {:<20}  {:<20}\n",
+                event_str,
+                keys_str,
+                file_str.italic()
+            ));
+        }
+        println!("{}", table)
+    });
+}
 
+/// Entry-point of the application.
 #[tokio::main]
 async fn main() -> Result<()> {
     // Parse command-line arguments.
     let args = Args::parse();
 
     // Initialize the logger.
-    logger::init(args.verbose.then_some(Level::DEBUG))?;
+    logger::init(
+        Some(match args.verbose {
+            0 => Level::INFO,
+            1 => Level::DEBUG,
+            _ => Level::TRACE,
+        }),
+        vec![env!("CARGO_PKG_NAME").to_string()],
+    )?;
     tracing::info!("Starting...");
 
     // Parse the config file.
@@ -45,17 +88,14 @@ async fn main() -> Result<()> {
     // Start the typewriter.
     if args.list_presets {
         tracing::info!("Available presets:");
-        config
-            .sound_presets
-            .iter()
-            .for_each(|preset| println!("{}", preset));
+        list_presets(config.sound_presets);
         return Ok(());
     } else if args.list_devices {
         tracing::info!("Available devices:");
-        rodio::cpal::default_host()
-            .output_devices()?
+        daktilo_lib::audio::get_devices()?
+            .iter()
             .try_for_each::<_, Result<()>>(|v| {
-                println!("• {}", v.name()?.white().bold());
+                println!("• {}", v.0.white().bold());
                 Ok(())
             })?;
         return Ok(());
@@ -71,7 +111,7 @@ async fn main() -> Result<()> {
     .map(|name| config.select_preset(name))
     .collect::<Result<Vec<_>>>()?;
 
-    match daktilo::run(
+    match daktilo_lib::run(
         presets,
         args.sound_variation_args.map(|v| v.into()),
         args.device,

@@ -1,4 +1,6 @@
-//! Turn your keyboard into a typewriter! 📇
+//! A library for turning your keyboard into a typewriter! 📇
+//!
+//! See [`daktilo`](https://github.com/orhun/daktilo).
 
 #![warn(missing_docs)]
 
@@ -11,14 +13,14 @@ pub mod logger;
 /// File embedder.
 pub mod embed;
 
-/// Command-line arguments.
-pub mod args;
-
 /// Application state.
 pub mod app;
 
 /// Configuration file.
 pub mod config;
+
+/// Rodio helpers.
+pub mod audio;
 
 use app::App;
 use config::{SoundPreset, SoundVariation};
