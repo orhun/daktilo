@@ -1,4 +1,6 @@
-//! Library Crate to turn your keyboard into a typewriter! 📇
+//! A library for turning your keyboard into a typewriter! 📇
+//!
+//! See [`daktilo`](https://github.com/orhun/daktilo).
 
 #![warn(missing_docs)]
 
