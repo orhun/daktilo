@@ -1,13 +1,52 @@
 use clap::Parser;
 use colored::Colorize;
 use daktilo::args::Args;
-use daktilo_lib::config::{Config, DEFAULT_CONFIG};
+use daktilo_lib::config::{Config, KeyEvent, SoundPreset, DEFAULT_CONFIG};
 use daktilo_lib::embed::EmbeddedConfig;
 use daktilo_lib::error::Result;
 use daktilo_lib::logger;
 use std::{fs, process};
 use tracing::Level;
 
+/// Prints the available presets to stdout as a table.
+fn list_presets(presets: Vec<SoundPreset>) {
+    tracing::info!("Available presets:");
+    presets.iter().for_each(|preset| {
+        println!("[{}]", preset.name.white().bold());
+        let mut table = format!(
+            " {:<20}  {:<20}  {:<20}\n",
+            "Event".bold(),
+            "Keys".bold(),
+            "File".bold()
+        );
+        table.push_str(&format!(
+            " {:<20}  {:<20}  {:<20}\n",
+            "-----", "----", "----"
+        ));
+        for key_config in &preset.key_config {
+            let event_str = match key_config.event {
+                KeyEvent::KeyPress => "Key Press",
+                KeyEvent::KeyRelease => "Key Release",
+            };
+            let keys_str = key_config.keys.as_str();
+            let file_str = &key_config
+                .files
+                .iter()
+                .map(|v| v.path.clone())
+                .collect::<Vec<String>>()
+                .join(",");
+            table.push_str(&format!(
+                " {:<20}  {:<20}  {:<20}\n",
+                event_str,
+                keys_str,
+                file_str.italic()
+            ));
+        }
+        println!("{}", table)
+    });
+}
+
+/// Entry-point of the application.
 #[tokio::main]
 async fn main() -> Result<()> {
     // Parse command-line arguments.
@@ -49,10 +88,7 @@ async fn main() -> Result<()> {
     // Start the typewriter.
     if args.list_presets {
         tracing::info!("Available presets:");
-        config
-            .sound_presets
-            .iter()
-            .for_each(|preset| println!("{}", preset));
+        list_presets(config.sound_presets);
         return Ok(());
     } else if args.list_devices {
         tracing::info!("Available devices:");

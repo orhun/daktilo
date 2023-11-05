@@ -28,8 +28,6 @@ serde.workspace = true
 thiserror.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
-# To be moved to cli? Not core lib functionality
-colored.workspace = true
 
 [dev-dependencies]
 pretty_assertions.workspace = true

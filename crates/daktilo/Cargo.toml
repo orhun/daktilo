@@ -31,10 +31,10 @@ regex = "1.10.2"
 serde_regex = "1.1.0"
 clap_complete = "4.4.4"
 clap_mangen = "0.2.15"
+colored = "2.0.4"
 tokio.workspace = true
 serde.workspace = true
 tracing.workspace = true
-colored.workspace = true
 daktilo_lib = { path = "../daktilo_lib" }
 
 [dev-dependencies]
