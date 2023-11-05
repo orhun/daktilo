@@ -1,7 +1,6 @@
+use crate::error::Result;
 use rodio::cpal::traits::HostTrait;
 use rodio::DeviceTrait;
-
-use crate::Result;
 
 /// Get a list of all available audio devices.
 pub fn get_devices() -> Result<Vec<(String, rodio::Device)>> {
