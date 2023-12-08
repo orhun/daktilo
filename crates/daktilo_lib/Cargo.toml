@@ -17,7 +17,7 @@ rdev = { version = "0.5.3", features = ["serialize"] }
 rodio = { version = "0.17.3", default-features = false, features = [
   "symphonia-mp3",
 ] }
-rust-embed = { version = "8.0.0", features = ["debug-embed", "compression"] }
+rust-embed = { version = "8.1.0", features = ["debug-embed", "compression"] }
 toml = "0.8.8"
 fastrand = "2.0.1"
 dirs = "5.0.1"
