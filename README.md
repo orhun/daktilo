@@ -43,6 +43,7 @@ Now you can recreate this moment without the actual need for a physical typewrit
   - [Adding custom presets](#adding-custom-presets)
   - [Sound Variation](#sound-variation)
 - [Similar Projects](#similar-projects)
+- [MacOS permissions](#macos-permissions)
 - [Acknowledgements](#acknowledgements)
 - [Donations](#donations)
 - [Contributing](#contributing)
@@ -349,6 +350,19 @@ Values are in percent, where the first value determines the maximum increase and
 
 - [`bucklespring`](https://github.com/zevv/bucklespring): Nostalgia bucklespring keyboard sound
 - [`selectric-mode`](https://github.com/rbanffy/selectric-mode): Make your Emacs sound like a proper typewriter
+
+## MacOS permissions
+
+On MacOS, you need to give some permissions to the terminal where you run **daktilo**.
+
+The first time you run **daktilo**, you will probably see this popup:
+
+![macos-permissions](assets/mac_terminal_permission.png)
+
+If you see it, click on "Open System Settings", otherwise open "System Settings" manually and go to "Privacy and Security".
+From here, enable "Input Monitoring" for your terminal application:
+
+![macos-input-monitoring](assets/mac_input_monitoring.png)
 
 ## Acknowledgements
 
