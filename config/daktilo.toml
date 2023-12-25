@@ -91,9 +91,9 @@ key_config = [
 ]
 
 # Sparks
-# For a high voltage high current Google Colab experience
+# For a high voltage high current typing experience
 [[sound_preset]]
-name = "colabpower"
+name = "sparks"
 key_config = [
   { event = "press", keys = "Backspace", files = [
 	{path = "derase.mp3"},
