@@ -16,7 +16,7 @@ rust-version = "1.70.0"
 edition = "2021"
 
 [workspace.dependencies]
-thiserror = "1.0.51"
+thiserror = "1.0.52"
 serde = { version = "1.0.193", features = ["derive"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
