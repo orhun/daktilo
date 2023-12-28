@@ -25,12 +25,12 @@ name = "daktilo-mangen"
 path = "src/bin/mangen.rs"
 
 [dependencies]
-clap = { version = "4.4.11", features = ["derive", "env", "wrap_help", "cargo"] }
+clap = { version = "4.4.12", features = ["derive", "env", "wrap_help", "cargo"] }
 dirs = "5.0.1"
 regex = "1.10.2"
 serde_regex = "1.1.0"
 clap_complete = "4.4.5"
-clap_mangen = "0.2.15"
+clap_mangen = "0.2.16"
 colored = "2.1.0"
 tokio.workspace = true
 serde.workspace = true
