@@ -90,6 +90,24 @@ key_config = [
   ], strategy = "sequential" },
 ]
 
+# Sparks
+# For a high voltage high current typing experience
+[[sound_preset]]
+name = "sparks"
+key_config = [
+  { event = "press", keys = "Backspace", files = [
+	{path = "derase.mp3"},
+  ], strategy = "random" },
+  { event = "press", keys = ".*", files = [
+    { path = "dspark1.mp3" },
+    { path = "dspark2.mp3" },
+	{ path = "dspark3.mp3" },
+	{ path = "dspark4.mp3" },
+	{ path = "dspark5.mp3" },
+	{ path = "dspark6.mp3" },
+  ], strategy = "random" },
+]
+
 # Here is how you can define your custom preset:
 # [[sound_preset]]
 # # Custom sound preset named "custom"
