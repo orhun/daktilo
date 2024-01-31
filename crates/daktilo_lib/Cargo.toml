@@ -18,7 +18,7 @@ rodio = { version = "0.17.3", default-features = false, features = [
   "symphonia-mp3",
 ] }
 rust-embed = { version = "8.2.0", features = ["debug-embed", "compression"] }
-toml = "0.8.8"
+toml = "0.8.9"
 fastrand = "2.0.1"
 dirs = "5.0.1"
 regex = "1.10.3"
