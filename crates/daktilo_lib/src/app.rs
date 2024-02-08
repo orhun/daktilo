@@ -4,25 +4,43 @@ use crate::{
     error::{Error, Result},
 };
 use rdev::{Event, EventType};
-use rodio::{cpal::traits::HostTrait, Decoder, DeviceTrait, OutputStream, Sink};
+use rodio::{
+    cpal::{self, traits::HostTrait},
+    Decoder, DeviceTrait, OutputStream, Sink,
+};
 use std::{fs::File, io::BufReader};
 
 /// Application state controller.
 pub struct App {
     /// Sound preset.
     preset: SoundPreset,
-    /// Output stream.
-    _stream: OutputStream,
-    /// Sink for key presses.
-    key_press_sink: Sink,
-    /// Sink for key releases.
-    key_release_sink: Sink,
+    /// Output streams.
+    _streams: Vec<OutputStream>,
+    /// Sinks for key press sounds.
+    sinks: Vec<Sink>,
+    /// Index of the next sink to use.
+    sink_index: usize,
     /// Whether if the key is released.
     key_released: bool,
     /// Index of the file to play.
     file_index: usize,
     /// Sound variations.
     variation: Option<SoundVariation>,
+}
+
+/// Create multiple sinks for the given device.
+/// Multiple sinks are useful for playing multiple sounds at the same time.
+fn create_sinks(num: usize, device: &cpal::Device) -> Result<(Vec<Sink>, Vec<OutputStream>)> {
+    let mut sinks = Vec::new();
+    let mut streams = Vec::new();
+    for _ in 0..num {
+        let (stream, handle) = OutputStream::try_from_device(&device)?;
+        let sink = Sink::try_new(&handle)?;
+        sinks.push(sink);
+        streams.push(stream);
+    }
+
+    Ok((sinks, streams))
 }
 
 impl App {
@@ -46,18 +64,31 @@ impl App {
             )
         })?;
         tracing::debug!("Using output device: {}", device.name()?);
-        let (stream, handle) = OutputStream::try_from_device(&device)?;
-        let key_press_sink = Sink::try_new(&handle)?;
-        let key_release_sink = Sink::try_new(&handle)?;
+
+        let (sinks, _streams) = create_sinks(8, &device)?;
+
         Ok(Self {
             preset,
-            _stream: stream,
-            key_press_sink,
-            key_release_sink,
+            _streams,
+            sinks,
+            sink_index: 0,
             key_released: true,
             file_index: 0,
             variation,
         })
+    }
+
+    /// Returns the sink to use for the next sound.
+    /// `cycle_sink()` Should always be called directly after
+    /// calling this method.
+    fn get_a_sink(&self) -> &Sink {
+        &self.sinks[self.sink_index]
+    }
+
+    /// Changes which sink will be returned by `get_a_sink`.
+    /// This should be called after each calling of `get_a_sink`.
+    fn cycle_sink(&mut self) {
+        self.sink_index = (self.sink_index + 1) % self.sinks.len();
     }
 
     /// Handle the key events.
@@ -104,7 +135,8 @@ impl App {
         if self.key_released {
             if let Some(key_config) = key_config {
                 let file = self.pick_sound_file(key_config)?;
-                self.play_sound(&file, self.get_variation(key_config), &self.key_press_sink)?;
+                self.play_sound(&file, self.get_variation(key_config), self.get_a_sink())?;
+                self.cycle_sink();
             }
         }
         self.key_released = false;
@@ -115,11 +147,8 @@ impl App {
     fn handle_key_release(&mut self, key_config: &Option<KeyConfig>) -> Result<()> {
         if let Some(key_config) = key_config {
             let file = self.pick_sound_file(key_config)?;
-            self.play_sound(
-                &file,
-                self.get_variation(key_config),
-                &self.key_release_sink,
-            )?;
+            self.play_sound(&file, self.get_variation(key_config), self.get_a_sink())?;
+            self.cycle_sink();
         }
         self.key_released = true;
         Ok(())
