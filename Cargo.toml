@@ -16,11 +16,11 @@ rust-version = "1.70.0"
 edition = "2021"
 
 [workspace.dependencies]
-thiserror = "1.0.56"
+thiserror = "1.0.57"
 serde = { version = "1.0.196", features = ["derive"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
-tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread", "sync"] }
+tokio = { version = "1.36.0", features = ["macros", "rt-multi-thread", "sync"] }
 colored = "2.1.0"
 pretty_assertions = "1.4.0"
 
