@@ -396,4 +396,4 @@ Licensed under either of [Apache License Version 2.0](./LICENSE-APACHE) or [The 
 
 ## Copyright
 
-Copyright © 2023, [Orhun Parmaksız](mailto:orhunparmaksiz@gmail.com)
+Copyright © 2023-2024, [Orhun Parmaksız](mailto:orhunparmaksiz@gmail.com)
