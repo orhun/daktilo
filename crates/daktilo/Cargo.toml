@@ -9,9 +9,9 @@ homepage.workspace = true
 repository.workspace = true
 keywords.workspace = true
 categories.workspace = true
-rust-version.workspace = true
 edition.workspace = true
 default-run = "daktilo"
+rust-version = "1.74.1"
 
 [features]
 audio-tests = []

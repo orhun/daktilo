@@ -12,7 +12,6 @@ homepage = "https://github.com/orhun/daktilo"
 repository = "https://github.com/orhun/daktilo"
 keywords = ["typewriter", "keyboard", "nostalgic", "type"]
 categories = ["command-line-utilities", "multimedia"]
-rust-version = "1.74.1"
 edition = "2021"
 
 [workspace.dependencies]
