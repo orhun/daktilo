@@ -67,6 +67,7 @@ There are also different presets available:
 | `musicbox`  | plays random notes like a music box             |
 | `ducktilo`  | quack quack 🦆                                  |
 | `drumkit`   | dum, tss, cha! 🥁                               |
+| `spark`     | high voltage high current typing experience ⚡  |
 
 To list the presets:
 
