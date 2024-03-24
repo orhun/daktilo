@@ -188,5 +188,5 @@ jobs:
         run: |
           for package in "daktilo" "daktilo_lib"; do
             printf "Checking MSRV for $package..."
-            cargo msrv --output-format json --path "crates/$package" verify | tail -n 1 | jq --exit-status '.success'
+            cargo-msrv --output-format json --path "crates/$package" verify | tail -n 1 | jq --exit-status '.success'
           done
