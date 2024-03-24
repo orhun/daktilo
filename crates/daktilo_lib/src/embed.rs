@@ -8,7 +8,7 @@ use std::str;
 
 /// Embedded sound assets.
 #[derive(RustEmbed)]
-#[folder = "../../sounds"]
+#[folder = "../../sounds/"]
 pub struct EmbeddedSound;
 
 impl EmbeddedSound {

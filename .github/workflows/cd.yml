@@ -34,6 +34,11 @@ jobs:
             libxtst-dev \
             pkg-config
 
+      - name: Update embedded locations
+        run: |
+          sed -i 's|"../../config/"|"../../../config/"|' crates/daktilo_lib/src/embed.rs
+          sed -i 's|"../../sounds/"|"../../../sounds/"|' crates/daktilo_lib/src/embed.rs
+
       - name: Run release-plz
         uses: MarcoIeni/release-plz-action@v0.5.44
         env:
