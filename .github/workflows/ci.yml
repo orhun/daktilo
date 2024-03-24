@@ -177,18 +177,16 @@ jobs:
       - name: Check typos
         uses: crate-ci/typos@master
 
+      - name: Install cargo-binstall
+        uses: taiki-e/install-action@cargo-binstall
+
+      - name: Install cargo-msrv
+        run: cargo binstall -y --force cargo-msrv
+
       - name: Run cargo-msrv
         shell: bash
         run: |
-          curl -s 'https://api.github.com/repos/foresterre/cargo-msrv/releases' | \
-            jq -r "[.[] | select(.prerelease == false)][0].assets[] | \
-            select(.name | ascii_downcase | test(\"linux.*x86_64|x86_64.*linux\")).browser_download_url" | \
-            wget -qi -
-          tar -xvf cargo-msrv*.tar* -C  ~/.cargo/bin/ cargo-msrv
-          # Workaround for https://github.com/foresterre/cargo-msrv/issues/590
-          for package in $(cargo metadata --format-version 1 --no-deps | jq -r ".workspace_members[]" | awk '{print $1}'); do
-            version=$(cargo metadata --format-version 1 --no-deps | jq -r '.packages[] | select(.name | test("^daktilo$")) | .rust_version')
-            printf "Checking MSRV $version for $package..."
-            echo -e "[package.metadata]\nmsrv = \"${version}\"" >> "crates/${package}/Cargo.toml"
-            cargo msrv --output-format json --path "crates/${package}" verify | tail -n 1 | jq --exit-status '.success'
+          for package in "daktilo" "daktilo_lib"; do
+            printf "Checking MSRV for $package..."
+            cargo msrv --output-format json --path "crates/$package" verify | tail -n 1 | jq --exit-status '.success'
           done

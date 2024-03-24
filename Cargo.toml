@@ -12,7 +12,6 @@ homepage = "https://github.com/orhun/daktilo"
 repository = "https://github.com/orhun/daktilo"
 keywords = ["typewriter", "keyboard", "nostalgic", "type"]
 categories = ["command-line-utilities", "multimedia"]
-rust-version = "1.74.1"
 edition = "2021"
 
 [workspace.dependencies]
@@ -50,10 +49,10 @@ debug = false
 inherits = "release"
 lto = "thin"
 
-# Configuration for 'cargo dist'
+# Config for 'cargo dist'
 [workspace.metadata.dist]
 # The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
-cargo-dist-version = "0.5.0"
+cargo-dist-version = "0.12.0"
 # CI backends to support
 ci = ["github"]
 # The installers to generate for each app
@@ -67,6 +66,8 @@ targets = [
 ]
 # Publish jobs to run in CI
 pr-run-mode = "upload"
+# Whether to install an updater program
+install-updater = false
 # Skip checking whether the specified configuration files are up to date
 allow-dirty = ["ci", "msi"]
 
