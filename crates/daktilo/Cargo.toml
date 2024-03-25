@@ -27,7 +27,7 @@ path = "src/bin/mangen.rs"
 [dependencies]
 clap = { version = "4.5.3", features = ["derive", "env", "wrap_help", "cargo"] }
 dirs = "5.0.1"
-regex = "1.10.3"
+regex = "1.10.4"
 serde_regex = "1.1.0"
 clap_complete = "4.5.1"
 clap_mangen = "0.2.20"
