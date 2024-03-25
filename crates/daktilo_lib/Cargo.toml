@@ -21,7 +21,7 @@ rust-embed = { version = "8.3.0", features = ["debug-embed", "compression"] }
 toml = "0.8.12"
 fastrand = "2.0.1"
 dirs = "5.0.1"
-regex = "1.10.3"
+regex = "1.10.4"
 serde_regex = "1.1.0"
 tokio.workspace = true
 serde.workspace = true
