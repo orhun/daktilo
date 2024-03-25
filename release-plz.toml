@@ -1,7 +1,7 @@
 # configuration for https://github.com/MarcoIeni/release-plz
 
 [workspace]
-allow_dirty = false
+allow_dirty = true
 changelog_config = "cliff.toml"
 changelog_update = true
 dependencies_update = true
