@@ -25,7 +25,7 @@ name = "daktilo-mangen"
 path = "src/bin/mangen.rs"
 
 [dependencies]
-clap = { version = "4.5.3", features = ["derive", "env", "wrap_help", "cargo"] }
+clap = { version = "4.5.4", features = ["derive", "env", "wrap_help", "cargo"] }
 dirs = "5.0.1"
 regex = "1.10.4"
 serde_regex = "1.1.0"
