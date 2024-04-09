@@ -40,7 +40,7 @@ jobs:
           sed -i 's|"../../sounds/"|"../../../sounds/"|' crates/daktilo_lib/src/embed.rs
 
       - name: Run release-plz
-        uses: MarcoIeni/release-plz-action@v0.5.49
+        uses: MarcoIeni/release-plz-action@v0.5.50
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_PLZ_TOKEN }}
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
