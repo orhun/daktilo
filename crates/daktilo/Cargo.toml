@@ -35,7 +35,7 @@ colored = "2.1.0"
 tokio.workspace = true
 serde.workspace = true
 tracing.workspace = true
-daktilo_lib = { path = "../daktilo_lib", version = "0.6.0" }
+daktilo_lib = { path = "../daktilo_lib", version = "0.6.1" }
 
 [dev-dependencies]
 pretty_assertions.workspace = true

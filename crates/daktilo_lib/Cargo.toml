@@ -1,6 +1,6 @@
 [package]
 name = "daktilo_lib"
-version = "0.6.0"
+version = "0.6.1"
 description.workspace = true
 authors.workspace = true
 license.workspace = true
