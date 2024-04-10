@@ -8,7 +8,7 @@ use std::str;
 
 /// Embedded sound assets.
 #[derive(RustEmbed)]
-#[folder = "../../sounds/"]
+#[folder = "../../../sounds/"]
 pub struct EmbeddedSound;
 
 impl EmbeddedSound {
@@ -22,7 +22,7 @@ impl EmbeddedSound {
 ///
 /// Embeds `config/`[`DEFAULT_CONFIG`] into the binary.
 #[derive(Debug, RustEmbed)]
-#[folder = "../../config/"]
+#[folder = "../../../config/"]
 pub struct EmbeddedConfig;
 
 impl EmbeddedConfig {
