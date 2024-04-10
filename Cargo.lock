@@ -465,7 +465,7 @@ dependencies = [
 
 [[package]]
 name = "daktilo"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "clap",
  "clap_complete",
@@ -483,7 +483,7 @@ dependencies = [
 
 [[package]]
 name = "daktilo_lib"
-version = "0.5.1"
+version = "0.6.0"
 dependencies = [
  "dirs",
  "fastrand",
