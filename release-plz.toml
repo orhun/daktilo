@@ -8,5 +8,5 @@ dependencies_update = true
 git_release_enable = false
 git_tag_enable = true
 pr_labels = ["release"]
-publish_allow_dirty = false
+publish_allow_dirty = true
 semver_check = false
