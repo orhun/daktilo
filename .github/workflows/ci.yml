@@ -149,10 +149,7 @@ jobs:
         run: editorconfig-checker
 
       - name: Check lints
-        run: |
-          sed -i 's|"../../config/"|"../../../config/"|' crates/daktilo_lib/src/embed.rs
-          sed -i 's|"../../sounds/"|"../../../sounds/"|' crates/daktilo_lib/src/embed.rs
-          cargo clippy -- -D warnings
+        run: cargo clippy -- -D warnings
 
       - name: Run cargo-deny
         uses: EmbarkStudios/cargo-deny-action@v1
