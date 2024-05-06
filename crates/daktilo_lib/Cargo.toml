@@ -14,7 +14,7 @@ rust-version = "1.74.1"
 
 [dependencies]
 rdev = { version = "0.5.3", features = ["serialize"] }
-rodio = { version = "0.17.3", default-features = false, features = [
+rodio = { version = "0.18.0", default-features = false, features = [
   "symphonia-mp3",
 ] }
 rust-embed = { version = "8.3.0", features = ["debug-embed", "compression"] }
