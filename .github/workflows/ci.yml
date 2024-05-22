@@ -28,7 +28,7 @@ jobs:
               TOOLCHAIN: stable,
               TARGET: x86_64-pc-windows-msvc,
             }
-          - { OS: macos-11, TOOLCHAIN: stable, TARGET: x86_64-apple-darwin }
+          - { OS: macos-14, TOOLCHAIN: stable, TARGET: x86_64-apple-darwin }
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
