@@ -16,7 +16,7 @@ edition = "2021"
 
 [workspace.dependencies]
 thiserror = "1.0.61"
-serde = { version = "1.0.203", features = ["derive"] }
+serde = { version = "1.0.204", features = ["derive"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 tokio = { version = "1.38.0", features = ["macros", "rt-multi-thread", "sync"] }
