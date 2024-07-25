@@ -56,7 +56,7 @@ pub async fn run(
     loop {
         if let Some(event) = receiver.recv().await {
             for app in apps.iter_mut() {
-                app.handle_key_event(event.clone()).unwrap();
+                app.handle_key_event(event.clone())?;
             }
         }
     }
