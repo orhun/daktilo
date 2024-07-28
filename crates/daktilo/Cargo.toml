@@ -13,9 +13,6 @@ edition.workspace = true
 default-run = "daktilo"
 rust-version = "1.74.1"
 
-[features]
-audio-tests = []
-
 [[bin]]
 name = "daktilo-completions"
 path = "src/bin/completions.rs"
