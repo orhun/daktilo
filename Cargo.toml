@@ -21,7 +21,7 @@ tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 tokio = { version = "1.40.0", features = ["macros", "rt-multi-thread", "sync"] }
 colored = "2.1.0"
-pretty_assertions = "1.4.0"
+pretty_assertions = "1.4.1"
 
 [profile.dev]
 opt-level = 0
