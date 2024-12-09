@@ -22,7 +22,7 @@ rodio = { version = "0.20.1", default-features = false, features = [
 ] }
 rust-embed = { version = "8.5.0", features = ["debug-embed", "compression"] }
 toml = "0.8.19"
-fastrand = "2.2.0"
+fastrand = "2.3.0"
 dirs = "5.0.1"
 regex = "1.11.1"
 serde_regex = "1.1.0"
