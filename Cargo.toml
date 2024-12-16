@@ -20,7 +20,7 @@ serde = { version = "1.0.216", features = ["derive"] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
 tokio = { version = "1.42.0", features = ["macros", "rt-multi-thread", "sync"] }
-colored = "2.1.0"
+colored = "2.2.0"
 pretty_assertions = "1.4.1"
 
 [profile.dev]
