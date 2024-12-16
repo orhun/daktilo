@@ -26,7 +26,7 @@ clap = { version = "4.5.23", features = ["derive", "env", "wrap_help", "cargo"] 
 dirs = "5.0.1"
 regex = "1.11.1"
 serde_regex = "1.1.0"
-clap_complete = "4.5.38"
+clap_complete = "4.5.39"
 clap_mangen = "0.2.24"
 colored = "2.1.0"
 tokio.workspace = true
