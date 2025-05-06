@@ -19,7 +19,7 @@ thiserror = "2.0.12"
 serde = { version = "1.0.219", features = ["derive"] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
-tokio = { version = "1.44.2", features = ["macros", "rt-multi-thread", "sync"] }
+tokio = { version = "1.45.0", features = ["macros", "rt-multi-thread", "sync"] }
 colored = "3.0.0"
 pretty_assertions = "1.4.1"
 
