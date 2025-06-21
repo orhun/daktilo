@@ -16,7 +16,7 @@ rust-version = "1.74.1"
 audio-tests = []
 
 [dependencies]
-rdev = { version = "0.5.3", features = ["serialize"] }
+rdev = { git = "https://github.com/Narsil/rdev.git", features = ["serialize", "wayland"] }
 rodio = { version = "0.20.1", default-features = false, features = [
   "symphonia-mp3",
 ] }
