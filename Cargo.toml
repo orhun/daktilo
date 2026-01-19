@@ -15,7 +15,7 @@ categories = ["command-line-utilities", "multimedia"]
 edition = "2021"
 
 [workspace.dependencies]
-thiserror = "2.0.17"
+thiserror = "2.0.18"
 serde = { version = "1.0.228", features = ["derive"] }
 tracing = "0.1.44"
 tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
