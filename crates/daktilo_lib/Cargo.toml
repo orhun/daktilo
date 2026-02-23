@@ -17,7 +17,7 @@ audio-tests = []
 
 [dependencies]
 rdev = { version = "0.5.3", features = ["serialize"] }
-rodio = { version = "0.22.0", default-features = false, features = [
+rodio = { version = "0.22.1", default-features = false, features = [
   "symphonia-mp3",
 ] }
 rust-embed = { version = "8.11.0", features = ["debug-embed", "compression"] }

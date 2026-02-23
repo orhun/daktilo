@@ -782,9 +782,9 @@ checksum = "3582f63211428f83597b51b2ddb88e2a91a9d52d12831f9d08f5e624e8977422"
 
 [[package]]
 name = "rodio"
-version = "0.22.0"
+version = "0.22.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2e6a09484777aa04334bf926448fdae8e22f223c09c9b512f8a9b6d7d5abe566"
+checksum = "e0e2319f90472c9934314a93df9f7cf81d48cebb6e8b8536a1da7f4dc4a15125"
 dependencies = [
  "dasp_sample",
  "num-rational",
