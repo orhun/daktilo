@@ -9,6 +9,7 @@ use std::str;
 
 /// Default configuration file.
 pub const DEFAULT_CONFIG: &str = "daktilo.toml";
+const APP_NAME: &str = "daktilo";
 
 /// Configuration.
 #[derive(Debug, Serialize, Deserialize)]
@@ -33,8 +34,8 @@ impl Config {
         if let Some(config_dirs) = dirs::config_dir().map(|config_dir| {
             vec![
                 config_dir.join(DEFAULT_CONFIG),
-                config_dir.join(env!("CARGO_PKG_NAME")).join(DEFAULT_CONFIG),
-                config_dir.join(env!("CARGO_PKG_NAME")).join("config"),
+                config_dir.join(APP_NAME).join(DEFAULT_CONFIG),
+                config_dir.join(APP_NAME).join("config"),
             ]
         }) {
             for config_dir in config_dirs {
